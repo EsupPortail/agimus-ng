@@ -1,0 +1,10 @@
+{
+	 "title": "ESUP4",
+	 "hits": 0,
+	 "description": "",
+	 "panelsJSON": "[{\"col\":1,\"id\":\"ESUP4-:-Login-Unique-par-jour\",\"row\":7,\"size_x\":6,\"size_y\":4,\"type\":\"visualization\"},{\"col\":7,\"id\":\"ESUP4-:-Login-par-jour\",\"row\":4,\"size_x\":6,\"size_y\":4,\"type\":\"visualization\"},{\"col\":5,\"id\":\"ESUP4-:-Repartition-d-utilisation-par-affectation\",\"row\":1,\"size_x\":4,\"size_y\":3,\"type\":\"visualization\"},{\"col\":1,\"id\":\"ESUP4-:-Repartition-d-utilisation-par-categorie\",\"row\":1,\"size_x\":4,\"size_y\":3,\"type\":\"visualization\"},{\"id\":\"ESUP4-:-Repartition-par-systeme-d-exploitation\",\"type\":\"visualization\",\"size_x\":4,\"size_y\":3,\"col\":9,\"row\":1}]",
+	 "version": 1,
+	 "kibanaSavedObjectMeta": {
+			"searchSourceJSON": "{\"filter\":[{\"query\":{\"query_string\":{\"analyze_wildcard\":true,\"query\":\"*\"}}}]}"
+	 }
+}
