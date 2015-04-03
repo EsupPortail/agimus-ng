@@ -12,3 +12,9 @@ Il permet de faire un suivi temporel de l'évolution des populations du ldap.
 ## daily_batch.sh
 Exemple de script permettant de lancer l'ensemble des traitements quotidiens nécessaires au fonctionnement d'Agimus-NG.
 Son utilisation suppose que les fichiers de log des applications à suivre ont été copiés en local.
+
+## kibana4.service
+File to make automatic start of kibana4 on centos
+
+## kibana4_init
+script initd to make automatic start of kibana4 on debian
