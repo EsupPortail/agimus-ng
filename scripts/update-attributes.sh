@@ -9,7 +9,7 @@
 INDEX_TO_PARSE='logstash-2015.04.02'
 
 # Template file to update attributes
-TEMPLATE_LOGSTASH_FILE=/home/elasticsearch/conf/logstash-update-attributes-TEMPLATE.conf
+TEMPLATE_LOGSTASH_FILE=../conf/logstash-update-attributes-TEMPLATE.conf
 
 # temporary dir
 TMP_DIR=/home/elasticsearch/tmp
