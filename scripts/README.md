@@ -18,3 +18,7 @@ File to make automatic start of kibana4 on centos
 
 ## kibana4_init
 script initd to make automatic start of kibana4 on debian
+
+## update-attributes.sh
+script to update, add, remove attributes form an existing eslactisearch index
+Use ../logstash/logstash-update-attributes-TEMPLATE.conf file
