@@ -1,0 +1,9 @@
+{
+		"title": "ANNUAIRE : Nombre de personnes pour les 20 affectations principales à ce jour",
+		"visState": "{\"type\":\"histogram\",\"params\":{\"addLegend\":true,\"addTooltip\":true,\"defaultYExtents\":false,\"mode\":\"stacked\",\"shareYAxis\":true},\"aggs\":[{\"id\":\"1\",\"type\":\"max\",\"schema\":\"metric\",\"params\":{\"field\":\"count\"}},{\"id\":\"2\",\"type\":\"terms\",\"schema\":\"segment\",\"params\":{\"field\":\"value\",\"size\":20,\"order\":\"desc\",\"orderBy\":\"1\"}}],\"listeners\":{}}",
+		"description": "",
+		"version": 1,
+		"kibanaSavedObjectMeta": {
+			 "searchSourceJSON": "{\"index\":\"ldap-stat\",\"query\":{\"query_string\":{\"query\":\"_type:ldap-stat AND attribut:supannEntiteAffectationPrincipale AND timestamp:[now-1d TO now]\",\"analyze_wildcard\":true}},\"filter\":[]}"
+		}
+ }

@@ -1,0 +1,9 @@
+{
+	"title": "ESUP4 : Répartition d'utilisation par affectation",
+	"visState": "{\"type\":\"pie\",\"params\":{\"shareYAxis\":true,\"addTooltip\":true,\"addLegend\":true,\"isDonut\":false},\"aggs\":[{\"id\":\"1\",\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"type\":\"terms\",\"schema\":\"segment\",\"params\":{\"field\":\"supannEntiteAffectationPrincipale.raw\",\"size\":40,\"order\":\"desc\",\"orderBy\":\"1\"}}],\"listeners\":{}}",
+	"description": "",
+	"version": 1,
+	"kibanaSavedObjectMeta": {
+		 "searchSourceJSON": "{\"index\":\"logstash-*\",\"query\":{\"query_string\":{\"query\":\"_type:ENT\",\"analyze_wildcard\":true}},\"filter\":[]}"
+	}
+}
