@@ -1,0 +1,10 @@
+#! /bin/sh
+# REMOVE http_proxy var
+TMP_PROXY=$http_proxy
+unset http_proxy
+
+/opt/logstash/bin/logstash $*
+
+# RESET http_proxy var
+export http_proxy=$TMP_PROXY
+
