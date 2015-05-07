@@ -22,3 +22,6 @@ script initd to make automatic start of kibana4 on debian
 ## update-attributes.sh
 script to update, add, remove attributes form an existing eslactisearch index
 Use ../logstash/logstash-update-attributes-TEMPLATE.conf file
+
+## kibana_import.sh
+Script to import a folder of visualizations or dashboards in Kibana.
