@@ -33,7 +33,7 @@ for attr in ldapAttrs:
 res = es.search(index="ldap", body=bodysearch)
 
 for attr in ldapAttrs:
-    print attr[0:-4]
+    print attr
     for f in res["aggregations"][attr]["buckets"]:
-        es.index(index="ldap-stat", doc_type="ldap-stat", body={"attribut": attr[
-                 0:-4], "value": f["key"], "count": f["doc_count"], "timestamp": date_object})
+        es.index(index="ldap-stat", doc_type="ldap-stat", body={"attribut": attr,
+                 "value": f["key"], "count": f["doc_count"], "timestamp": date_object})
