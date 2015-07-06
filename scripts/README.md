@@ -25,3 +25,6 @@ Use ../logstash/logstash-update-attributes-TEMPLATE.conf file
 
 ## kibana_import.sh
 Script to import a folder of visualizations or dashboards in Kibana.
+
+## kibana_export.py
+Script to export quickly all the dashboards and the visualizations in folders.
