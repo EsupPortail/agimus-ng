@@ -1,9 +1,0 @@
-{
-		"title": "ANNUAIRE : Répartition des affiliations dans le LDAP",
-		"visState": "{\"aggs\":[{\"id\":\"1\",\"params\":{\"field\":\"count\"},\"schema\":\"metric\",\"type\":\"sum\"},{\"id\":\"2\",\"params\":{\"field\":\"value\",\"order\":\"desc\",\"orderBy\":\"1\",\"size\":20},\"schema\":\"segment\",\"type\":\"terms\"}],\"listeners\":{},\"params\":{\"addLegend\":true,\"addTooltip\":true,\"isDonut\":false,\"shareYAxis\":true},\"type\":\"pie\"}",
-		"description": "",
-		"version": 1,
-		"kibanaSavedObjectMeta": {
-			 "searchSourceJSON": "{\"index\":\"ldap-stat\",\"query\":{\"query_string\":{\"query\":\"_type:ldap-stat AND attribut:eduPersonPrimaryAffiliation AND timestamp:[now-1d TO now]\",\"analyze_wildcard\":true}},\"filter\":[]}"
-		}
- }
