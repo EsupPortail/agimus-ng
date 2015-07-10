@@ -3,6 +3,7 @@
 TMP_PROXY=$http_proxy
 unset http_proxy
 
+# update with the correct path of your logstash 
 /opt/logstash/bin/logstash $*
 
 # RESET http_proxy var
