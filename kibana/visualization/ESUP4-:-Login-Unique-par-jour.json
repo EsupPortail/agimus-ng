@@ -1,0 +1,9 @@
+{
+	 "title": "ESUP4 : Login unique par jour",
+	 "visState": "{\n  \"type\": \"histogram\",\n  \"params\": {\n    \"shareYAxis\": true,\n    \"addTooltip\": true,\n    \"addLegend\": true,\n    \"mode\": \"stacked\",\n    \"defaultYExtents\": false\n  },\n  \"aggs\": [\n    {\n      \"id\": \"1\",\n      \"type\": \"cardinality\",\n      \"schema\": \"metric\",\n      \"params\": {\n        \"field\": \"uid.raw\"\n      }\n    },\n    {\n      \"id\": \"2\",\n      \"type\": \"date_histogram\",\n      \"schema\": \"segment\",\n      \"params\": {\n        \"field\": \"@timestamp\",\n        \"interval\": \"day\",\n        \"min_doc_count\": 1,\n        \"extended_bounds\": {}\n      }\n    },\n    {\n      \"id\": \"3\",\n      \"type\": \"terms\",\n      \"schema\": \"group\",\n      \"params\": {\n        \"field\": \"eduPersonPrimaryAffiliation.raw\",\n        \"size\": 15,\n        \"order\": \"desc\",\n        \"orderBy\": \"1\"\n      }\n    }\n  ],\n  \"listeners\": {}\n}",
+	 "description": "",
+	 "version": 1,
+	 "kibanaSavedObjectMeta": {
+			"searchSourceJSON": "{\n  \"index\": \"logstash-*\",\n  \"query\": {\n    \"query_string\": {\n      \"query\": \"_type:esup4 AND request.raw:\\\\/Login\",\n      \"analyze_wildcard\": true\n    }\n  },\n  \"filter\": []\n}"
+	 }
+}
