@@ -6,7 +6,8 @@ import fileinput
 ####################################################
 ## Define the attributes used to enrich your data
 #
-ldap_attributes = ['eduPersonPrimaryAffiliation', 'supannEntiteAffectationPrincipale', 'supannEtuCursusAnnee', 'supannEtuSecteurDisciplinaire']
+#ldap_attributes = ['eduPersonPrimaryAffiliation', 'supannEntiteAffectationPrincipale', 'supannEtuCursusAnnee', 'supannEtuSecteurDisciplinaire']
+ldap_attributes = ['eduPersonPrimaryAffiliation', 'supannEntiteAffectationPrincipale', 'supannEtuDiplome', 'supannEtuCursusAnnee', 'supannEtuSecteurDisciplinaire', 'supannEtuRegimeInscription', 'supannEtablissement']
 #
 ##
 ####################################################
@@ -33,10 +34,11 @@ os.mkdir(build_dir+'/logstash')
 # Copy and personnalize the original files
 if os.path.isdir(conf_dir):
 	for conf_file in os.listdir(conf_dir):
-		with open(build_dir+"/logstash/"+conf_file,'w+') as build_file:
-			with open(conf_dir+"/"+conf_file) as orig_file:
-				for line in orig_file:
-					build_file.write(line.replace('__VOS_ATTRIBUTS__', attr).replace('__VOS_ATTRIBUTS_HASHES__', attr_hash))
+		if os.path.isfile(conf_dir+"/"+conf_file):
+			with open(build_dir+"/logstash/"+conf_file,'w+') as build_file:
+				with open(conf_dir+"/"+conf_file) as orig_file:
+					for line in orig_file:
+						build_file.write(line.replace('__VOS_ATTRIBUTS__', attr).replace('__VOS_ATTRIBUTS_HASHES__', attr_hash))
 
 else:
 	print "Warning: the directory "+conf_dir+" doesn't exist"
