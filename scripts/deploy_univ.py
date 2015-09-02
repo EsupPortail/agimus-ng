@@ -2,12 +2,20 @@
 import os
 import shutil
 import fileinput
+import sys
 
 ####################################################
 ## Define the attributes used to enrich your data
 #
 #ldap_attributes = ['eduPersonPrimaryAffiliation', 'supannEntiteAffectationPrincipale', 'supannEtuCursusAnnee', 'supannEtuSecteurDisciplinaire']
-ldap_attributes = ['eduPersonPrimaryAffiliation', 'supannEntiteAffectationPrincipale', 'supannEtuDiplome', 'supannEtuCursusAnnee', 'supannEtuSecteurDisciplinaire', 'supannEtuRegimeInscription', 'supannEtablissement']
+
+ldap_attributes = []
+
+if sys.argv and len(sys.argv) > 1 :
+	for arg in sys.argv[1:]:
+		ldap_attributes.append(arg)
+else :
+	ldap_attributes = ['eduPersonPrimaryAffiliation', 'supannEntiteAffectationPrincipale', 'supannEtuDiplome', 'supannEtuCursusAnnee', 'supannEtuSecteurDisciplinaire', 'supannEtuRegimeInscription', 'supannEtablissement']
 #
 ##
 ####################################################
