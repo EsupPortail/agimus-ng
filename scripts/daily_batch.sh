@@ -8,7 +8,6 @@ else
 fi
 
 
-ES_DIR=/home/elasticsearch
 NBDAY_KEEP_LOG=3
 LOG_DIR=/data/logs
 REP_LOGS=$LOG_DIR/$DATE
@@ -43,10 +42,10 @@ if [ "$DELETE_OLD_LOG" = true ] ; then
 fi
 
 if [ "$DUMP_KIBANA_ES" = true ] ; then
-echo "$LINE_SEPARATOR"
-echo "#### Dump Elasticsearch templates and .kibana4 index"
-$ES_DIR/bin/dump_kibana_ES_conf.sh
-echo ""
+	echo "$LINE_SEPARATOR"
+	echo "#### Dump Elasticsearch templates and .kibana index"
+	$BUILD_HOME/scripts/dump_kibana_ES_conf.sh
+	echo ""
 fi
 
 echo "$LINE_SEPARATOR"
@@ -103,5 +102,5 @@ echo "$LINE_SEPARATOR"
 
 if [ -s $ERROR_LOG ]; then
     export CONTENT_TYPE="text/plain"
-    /bin/mail -s "ERREUR dans le traitement AGIMUS-NG : "$(date '+%d/%m/%Y') $MAIL_DEST < $INFO_LOG
+    /bin/mail -s "$(echo -e "ERREUR dans le traitement AGIMUS-NG : "$(date '+%d/%m/%Y')"\nContent-Type: text/plain")" $MAIL_DEST < $INFO_LOG
 fi
