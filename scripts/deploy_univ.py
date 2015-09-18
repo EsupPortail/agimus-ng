@@ -6,8 +6,9 @@ import sys
 
 ####################################################
 ## Define the attributes used to enrich your data
+## You can pass them as arguments or replace the values
+## on the line starting with ldap_attributes = [
 #
-#ldap_attributes = ['eduPersonPrimaryAffiliation', 'supannEntiteAffectationPrincipale', 'supannEtuCursusAnnee', 'supannEtuSecteurDisciplinaire']
 
 ldap_attributes = []
 
@@ -15,7 +16,7 @@ if sys.argv and len(sys.argv) > 1 :
 	for arg in sys.argv[1:]:
 		ldap_attributes.append(arg)
 else :
-	ldap_attributes = ['eduPersonPrimaryAffiliation', 'supannEntiteAffectationPrincipale', 'supannEtuDiplome', 'supannEtuCursusAnnee', 'supannEtuSecteurDisciplinaire', 'supannEtuRegimeInscription', 'supannEtablissement']
+	ldap_attributes = ['eduPersonPrimaryAffiliation', 'supannEntiteAffectationPrincipale', 'supannEtuCursusAnnee', 'supannEtuSecteurDisciplinaire']
 #
 ##
 ####################################################

@@ -2,7 +2,7 @@
 
 ## deploy_univ.py
 Ce script va vous permettre de modifier automatiquement les fichiers de ce dépôt pour y intégrer les attributs LDAP que vous souhaitez suivre via Agimus-NG
-Il nécessite d'être paramétrer en indiquant les attributs à prendre en compte (en début de fichier)
+Il nécessite d'être paramétré en indiquant les attributs à prendre en compte (en début de fichier ou en paramètres lors de l'appel de la fonction)
 Son exécution générera un répertoire build qui contiendra les fichiers modifiés.
 
 ## ldap-agg.py
