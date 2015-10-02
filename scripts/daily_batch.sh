@@ -74,7 +74,7 @@ echo "$LINE_SEPARATOR"
 echo "#### Import ENT logs : "`date +'%F %R'`
 if [ -f "$REP_LOGS/access-ent.log.gz" ]; then
 	echo "#### Number of lines in file "`zcat $REP_LOGS/access-ent.log.gz | wc -l`
-	zcat $REP_LOGS/access-ent.log.gz | $LOGSTASH_DIR/bin/logstash --quiet -f $BUILD_HOME/logstash/logstash-esup3.conf >&2
+	zcat $REP_LOGS/access-ent.log.gz | $LOGSTASH_DIR/bin/logstash --quiet -f $BUILD_HOME/logstash/logstash-esup.conf >&2
 else
         echo "ERR : NO file logs ENT" >&2
 fi
