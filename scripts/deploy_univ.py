@@ -52,12 +52,14 @@ if os.path.isdir(conf_dir):
 else:
 	print "Warning: the directory "+conf_dir+" doesn't exist"
 
-if os.path.isfile(script_dir+"/ldap-agg.py"):
-	with open(build_dir+"/scripts/ldap-agg.py",'w+') as build_file:
-		with open(script_dir+"/ldap-agg.py") as orig_file:
-			for line in orig_file:
-				build_file.write(line.replace('__VOS_ATTRIBUTS__', attr))
+if os.path.isdir(script_dir):
+	for script_file in os.listdir(script_dir):
+		if os.path.isfile(script_dir+"/"+script_file):
+			with open(build_dir+"/scripts/"+script_file,'w+') as build_file:
+				with open(script_dir+"/"+script_file) as orig_file:
+					for line in orig_file:
+						build_file.write(line.replace('__VOS_ATTRIBUTS__', attr).replace('__VOS_ATTRIBUTS_HASHES__', attr_hash))
 else:
-	print "Warning: the file "+script_dir+"/ldap-agg.py doesn't exist"
+	print "Warning: the directory "+script_dir+" doesn't exist"
 
 print "The modified files are avalaible in the build directory: "+build_dir
