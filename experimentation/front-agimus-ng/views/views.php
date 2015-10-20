@@ -1,9 +1,8 @@
 <?php
 
     function redirect_to_default_dashboard_action($user) {
-        global $index_path, $user, $dashboards, $root_uri;
+        global $index_path, $dashboards, $root_uri;
         header( "refresh:0;url=".$root_uri."/index.php/dashboard/".$dashboards[0]->getId()."/");
-        //require $index_path.'/templates/admin/dashboard/dashboards.php';
     }
 
     function show_dashboard_action($id) {

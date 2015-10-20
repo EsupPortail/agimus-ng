@@ -10,7 +10,7 @@
     if ($pos_ind > 0) {
         $root_uri = substr($_SERVER["REQUEST_URI"],0,$pos_ind);
     } else {
-        $root_uri = substr($_SERVER["REQUEST_URI"],0,-7);
+        $root_uri = ""; //substr($_SERVER["REQUEST_URI"],0,-7);
     }
 
     phpCAS::setDebug();

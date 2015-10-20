@@ -43,12 +43,14 @@
             <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
             <span><?php echo $startDate." - ".$endDate; ?></span> <b class="caret"></b>
         </div>
-
+        <!--
         <?php if(isset($_SERVER['HTTP_REFERER'])) { ?>
           <a href="<?php echo $_SERVER['HTTP_REFERER']; ?>" class="btn btn-default" id="menu-toggle">retour</a>
         <?php } else { ?>
           <a href="<?php echo $root_uri; ?>/index.php" class="btn btn-default" id="menu-toggle">retour</a>
         <?php } ?>
+        -->
+        <a href="<?php echo $root_uri; ?>/index.php?startDate=<?php echo $_GET['startDate']; ?>&endDate=<?php echo $_GET['endDate']; ?>" class="btn btn-default" id="menu-toggle">retour</a>
       </div>
     </div>
     <iframe class="img-responsive" src="<?php echo $graphe->getCheckedUrl($startDate, $endDate); ?>"  style="display:block;width:99%;max-width:100%;height:95%;border:0"/> </iframe>
@@ -113,6 +115,9 @@
         });
      
     });
+
+    
+
     </script>
   </body>
 </html>

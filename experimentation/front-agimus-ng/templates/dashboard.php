@@ -39,7 +39,7 @@
                 <?php } ?>
                 <li>Vos tableaux de bords:</li>
                 <?php foreach($dashboards as $dash): ?>
-                <li <?php if($dash->getId()==$dashboard->getId()) echo 'class="active"'; ?>>
+                <li <?php if($dash->getId()==$dashboard->getId()) echo 'class="active"'; ?> >
                     <a href="<?php echo $root_uri; ?>/index.php/dashboard/<?php echo $dash->getId(); ?>/?startDate=<?php echo $startDate; ?>&endDate=<?php echo $endDate; ?>"><?php echo $dash->getTitle(); ?></a>
                 </li>
                 <?php endforeach ?>
@@ -95,7 +95,7 @@
               </div>
               <?php } ?>
               <hr>
-
+            
             <!-- Footer -->
             <footer>
                 <div class="row text-center">
@@ -183,6 +183,21 @@
     });
  
 });
+
+var i = 0;
+$('iframe').each(function(){
+  console.log($(this));
+  var oDoc = this.contentWindow || this.contentDocument;
+  /*if (oDoc.document) {
+      oDoc = oDoc.document;
+  }*/
+  console.log(oDoc.location);
+  console.log(oDoc.document.body.innerHTML);
+  //if()
+    //<title>Kibana-acces-denied</title>
+
+});
+
 </script>
 
   </body>

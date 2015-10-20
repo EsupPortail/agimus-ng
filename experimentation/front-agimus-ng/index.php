@@ -10,7 +10,7 @@
     if ($pos_ind > 0) {
         $root_uri = substr($_SERVER["REQUEST_URI"],0,strpos($_SERVER["REQUEST_URI"],'/index.php'));
     } else {
-        $root_uri = substr($_SERVER["REQUEST_URI"],0,-1);
+        $root_uri = ""; //substr($_SERVER["REQUEST_URI"],0,-1);
     }
     
     phpCAS::setDebug();
@@ -61,6 +61,7 @@
     $email = isset($casdata['mail']) ? $casdata['mail'] : "";
 
     $user = get_or_create_user(phpCAS::getUser(), $email);
+
     $dashboards = get_user_dashboards($user);
 
     require_once './views/views.php';
@@ -70,15 +71,17 @@
     $uri=strtok($_SERVER["REQUEST_URI"],'?');
 
     if(($root_uri.'/index.php'==$uri)||($root_uri.'/'==$uri)){
-        if(isset($dashboards) && $dashboards.count()>0) redirect_to_default_dashboard_action($user);
-        else show_dashboard_action(-1);
+        if(isset($dashboards) && count($dashboards)>0) {
+            redirect_to_default_dashboard_action($user);
+        } else show_dashboard_action(-1);
     } elseif(preg_match(','.$root_uri.'/index.php/dashboard/(?P<id>\d+)/,', $uri, $matches)) {
+        //echo $uri."<br/>";        
         show_dashboard_action($matches['id']);
     } elseif(preg_match(','.$root_uri.'/index.php/graphe/(?P<id>\d+)/,', $uri, $matches)) {
         show_graphe_action($matches['id']);
     } else {
       header('Status: 404 Not Found');
-      echo '<html><body><h1>Page Not Found</h1></body></html>';
+      echo '<html><body>'.$root_uri.'<h1>Page Not Found</h1></body></html>';
     }
     
 ?>

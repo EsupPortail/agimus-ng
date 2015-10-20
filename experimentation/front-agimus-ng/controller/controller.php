@@ -40,10 +40,11 @@ function get_user_dashboards($user) {
     $link = open_database_connection();
     if($user->isAdmin()){
         $result = mysql_query('SELECT * FROM `dashboard`');
+        
     } else {
         $query = 'SELECT * FROM `dashboard` WHERE `roles` = ""';
         foreach ($user->getRoles() as $role) {
-            $query = $query.' OR `roles` = "'.$role.'"';
+            $query = $query.' OR `roles` like "%'.$role.'%"';
         }
         $result = mysql_query($query);
     }
