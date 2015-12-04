@@ -1,0 +1,9 @@
+{
+      "title": "Auth CAS : Répartition par type de réseaux",
+      "visState": "{\"type\":\"pie\",\"params\":{\"addLegend\":true,\"addTooltip\":true,\"isDonut\":false,\"shareYAxis\":true},\"aggs\":[{\"id\":\"1\",\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"type\":\"terms\",\"schema\":\"segment\",\"params\":{\"field\":\"network.type.raw\",\"size\":5,\"order\":\"desc\",\"orderBy\":\"1\",\"json\":\"\"}}],\"listeners\":{}}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+         "searchSourceJSON": "{\"index\":\"logstash-*\",\"query\":{\"query_string\":{\"query\":\"_type:casrequest\",\"analyze_wildcard\":true}},\"filter\":[]}"
+      }
+}

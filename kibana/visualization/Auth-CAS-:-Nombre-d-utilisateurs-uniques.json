@@ -1,0 +1,9 @@
+{
+      "title": "Auth CAS : Nombre d'utilisateurs uniques",
+      "visState": "{\n  \"type\": \"metric\",\n  \"params\": {\n    \"fontSize\": \"50\"\n  },\n  \"aggs\": [\n    {\n      \"id\": \"1\",\n      \"type\": \"cardinality\",\n      \"schema\": \"metric\",\n      \"params\": {\n        \"field\": \"ldap_uid.raw\"\n      }\n    }\n  ],\n  \"listeners\": {}\n}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+         "searchSourceJSON": "{\n  \"index\": \"logstash-*\",\n  \"query\": {\n    \"query_string\": {\n      \"query\": \"_type:casrequest\",\n      \"analyze_wildcard\": true\n    }\n  },\n  \"filter\": []\n}"
+      }
+}
