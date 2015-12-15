@@ -16,6 +16,7 @@
                   <th>Titre</th>
                   <th>Description</th>
                   <th>roles</th>
+                  <th>Url</th>
                   <th>Graphiques</th>
                   <th>Action</th>
                   <th>Action</th>
@@ -28,6 +29,7 @@
                   <td><?php echo $dashboard->getTitle(); ?></td>
                   <td><?php echo $dashboard->getDescription(); ?></td>
                   <td><?php foreach($dashboard->getRoles() as $role){ echo "$role "; } ?></td>
+                  <td><?php echo substr($dashboard->getUrl(), 0, 100); ?>...</td>
                   <td><?php foreach($dashboard->getGraphes() as $graphe){ echo "- ".$graphe->getTitle()."<br/>"; } ?></td>
                   <td>
                     <form method="get" action="<?php echo $root_uri; ?>/admin/index.php/dashboards">

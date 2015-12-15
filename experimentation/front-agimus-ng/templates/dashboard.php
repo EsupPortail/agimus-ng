@@ -76,6 +76,9 @@
               <!-- /.row -->
               <!-- Projects Row -->
               <?php if(isset($dashboard)) { ?>
+              <?php if($dashboard->getUrl()!="") { ?>
+              <iframe src="<?php echo $dashboard->getCheckedUrl($startDate, $endDate); ?>"  style="display:block;width:100%;max-width:100%;height:100%;"/> </iframe>
+              <?php } else { ?>
               <div class="row">
               <?php foreach($dashboard->getGraphes() as $index=>$graphe): ?>
 
@@ -93,6 +96,7 @@
                   </div>
               <?php endforeach ?>
               </div>
+              <?php } ?>
               <?php } ?>
               <hr>
             

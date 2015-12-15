@@ -69,6 +69,10 @@
                   <span id="grapheshelpBlock" class="help-block">Maintenez appuyé « Ctrl », ou « Commande (touche pomme) » sur un Mac, pour en sélectionner plusieurs.</span>
                 </div>
                 <div class="form-group">
+                  <label for="url">Url</label>
+                  <input type="url" class="form-control" id="url" placeholder="Url" name="url" <?php if(isset($form_dashboard)) echo "value=\"".$form_dashboard->getUrl()."\""; ?> >
+                </div>
+                <div class="form-group">
                   <label for="roles">Gaphiques</label>
                    <select multiple class="form-control" id="graphes" placeholder="graphe1,graphe2" name="graphes[]" >
                     <?php

@@ -17,7 +17,7 @@
                     if($index==0) $send_roles.= $role;
                     else $send_roles.= ",".$role;
                 }
-                $new_dashboard = create_new_dashboard($_POST['title'], $_POST['description'], $send_roles, $_POST['graphes']);
+                $new_dashboard = create_new_dashboard($_POST['title'], $_POST['description'], $send_roles, $_POST['graphes'], $_POST['url']);
             } else {
                 $msg = array("level"=>"danger", "message"=>"Vous devez renseigner au moins un role d'accès et un titre à ce tableau de bord");
             }
@@ -43,7 +43,7 @@
                     }
                     $graphes = array();
                     if(isset($_POST['graphes'])) $graphes=$_POST['graphes'];
-                    $form_dashboard = update_dashboard($_POST['id'], $_POST['title'], $_POST['description'], $send_roles, $graphes);
+                    $form_dashboard = update_dashboard($_POST['id'], $_POST['title'], $_POST['description'], $send_roles, $graphes, $_POST['url']);
                 } else {
                     $msg = array("level"=>"danger", "message"=>"Vous devez renseigner au moins un role d'accès et un titre à ce tableau de bord");
                 }

@@ -247,7 +247,7 @@ function delete_graphe_by_id($id) {
 function get_dashboard_by_id($id) {
     $link = open_database_connection();
     $id = intval($id);
-    $query = 'SELECT `id`, `title`, `description`, `roles` FROM dashboard WHERE id = '.$id;
+    $query = 'SELECT `id`, `title`, `description`, `roles`, `url` FROM dashboard WHERE id = '.$id;
     if($result=mysql_query($query)) {
         $dashboard = mysql_fetch_object($result, 'Dashboard');
         close_database_connection($link);
@@ -261,7 +261,7 @@ function get_dashboard_by_id($id) {
 
 function get_all_dashboard() {
     $link = open_database_connection();
-    $query = 'SELECT `id`, `title`, `description`, `roles` FROM dashboard';
+    $query = 'SELECT `id`, `title`, `description`, `roles`, `url` FROM dashboard';
     $result=mysql_query($query);
     $dashboards = array();
     while($dashboard = mysql_fetch_object($result, 'Dashboard')) {
@@ -289,13 +289,14 @@ function get_graphe_from_dashboard($dashboard) {
     return $graphes;
 }
 
-function create_new_dashboard($title, $description="", $roles, $graphes_id=array() ) {
+function create_new_dashboard($title, $description="", $roles, $graphes_id=array(), $url="" ) {
     $link = open_database_connection();
     $dashboard=null;
     $title = addslashes(stripslashes(trim(htmlspecialchars($title))));
     $description = addslashes(stripslashes(trim(htmlspecialchars($description))));
     $roles = addslashes(stripslashes(trim(htmlspecialchars($roles))));
-    $sql_insert = 'INSERT INTO `dashboard` (`id`, `title`, `description`, `roles`) VALUES (NULL, \''.$title.'\', \''.$description.'\', \''.$roles.'\');';
+    $url = addslashes(stripslashes(trim(htmlspecialchars($url))));
+    $sql_insert = 'INSERT INTO `dashboard` (`id`, `title`, `description`, `roles`, `url`) VALUES (NULL, \''.$title.'\', \''.$description.'\', \''.$roles.'\', \''.$url.'\');';
     if(mysql_query($sql_insert)) {
         if(isset($graphes_id) && !empty($graphes_id)) {
             $list_values="";
@@ -320,7 +321,7 @@ function create_new_dashboard($title, $description="", $roles, $graphes_id=array
     return $dashboard;
 }
 
-function update_dashboard($id, $title, $description="", $roles, $graphes_id=array() ) {
+function update_dashboard($id, $title, $description="", $roles, $graphes_id=array(), $url="" ) {
     $link = open_database_connection();
     $dashboard=null;
     $id = intval($id);
@@ -328,8 +329,9 @@ function update_dashboard($id, $title, $description="", $roles, $graphes_id=arra
     $title = addslashes(stripslashes(trim(htmlspecialchars($title))));
     $description = addslashes(stripslashes(trim(htmlspecialchars($description))));
     $roles = addslashes(stripslashes(trim(htmlspecialchars($roles))));
+    $url = addslashes(stripslashes(trim(htmlspecialchars($url))));
+    $sql_update = 'UPDATE `dashboard` SET `title` = \''.$title.'\', `roles` = \''.$roles.'\',`url` = \''.$url.'\', `description` = \''.$description.'\'   WHERE `id` = '.$id.';';
     
-    $sql_update = 'UPDATE `dashboard` SET `title` = \''.$title.'\', `roles` = \''.$roles.'\', `description` = \''.$description.'\'   WHERE `id` = '.$id.';';
 
     if(mysql_query($sql_update)) {
         //delete all previous relation
