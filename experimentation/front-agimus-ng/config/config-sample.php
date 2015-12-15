@@ -26,4 +26,24 @@
 
     // Set an UTF-8 encoding header for internation characters (User attributes)
     header('Content-Type: text/html; charset=utf-8');
+
+/***  script JS de protection de kibana *** à insérer dans "kibana/src/public/index.html"
+    <script>
+    var regex = new RegExp("\/\#\/(visualize|dashboard)\/(.*)\?embed\&(.*)");
+    var port = location.port ? location.port: 80;
+    if(port==80 && !regex.test(location.href)) {
+        //alert("vous n'avez pas accès à cette ressource "+location.href);
+
+        if(self==top) {
+            window.location = "/index.html";
+        } else {
+            //alert('home.html is in iframe');
+            //check regex with parent iframe src
+            window.location = "/index.html";
+        }
+        //window.location = "/index.html";
+    }
+    </script>
+***/
+
 ?>
