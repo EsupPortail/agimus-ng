@@ -1,0 +1,14 @@
+{
+    "_id": "Suivi-ES",
+    "_type": "dashboard",
+    "_source": {
+      "title": "Suivi ES",
+      "hits": 0,
+      "description": "",
+      "panelsJSON": "[{\"col\":1,\"id\":\"Suivie-ES-:-répartition-des-documents-par-type\",\"row\":1,\"size_x\":3,\"size_y\":5,\"type\":\"visualization\"},{\"col\":1,\"id\":\"Suivi-ES-:-Nombre-de-document-dans-le-temps\",\"row\":8,\"size_x\":12,\"size_y\":7,\"type\":\"visualization\"},{\"id\":\"Suivi-ES-:-Nombre-de-document-dans-chaque-type\",\"type\":\"visualization\",\"size_x\":6,\"size_y\":5,\"col\":7,\"row\":1},{\"id\":\"Suivi-ES-:-Nombre-de-documents\",\"type\":\"visualization\",\"size_x\":3,\"size_y\":5,\"col\":4,\"row\":1}]",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"filter\":[{\"query\":{\"query_string\":{\"analyze_wildcard\":true,\"query\":\"*\"}}}]}"
+      }
+    }
+}
