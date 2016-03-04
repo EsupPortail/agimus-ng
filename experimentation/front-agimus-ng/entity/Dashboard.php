@@ -225,12 +225,16 @@ class Dashboard {
         $new_query = "embed&_g=".$g."&_a=".$a;
         $parseurlfragment['query'] = $new_query;
         $urlfragment = $this->unparse_url($parseurlfragment);
-        $parsed_url['fragment'] = $urlfragment;
+        $parsed_url['fragment'] = $this->clean_fragment($urlfragment);
 
         $new_url = $this->unparse_url($parsed_url);
         
         return $new_url;
     }
+
+		function clean_fragment($fragment) {
+			return str_replace( '"' ,  '%22' , $fragment );
+		}
 
     function unparse_url($parsed_url) { 
       $scheme   = isset($parsed_url['scheme']) ? $parsed_url['scheme'] . '://' : ''; 
