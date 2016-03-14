@@ -202,18 +202,30 @@ class Dashboard {
             $from_time = date("Y-m-d",$lastmonth);
         }
 
-        //$g = "(time:(from:'".$from_time."',mode:absolute,to:'".$to_time."'))";
-        //$g = "(refreshInterval:(display:Off,pause:!f,section:0,value:0),time:(from:now-30d,mode:quick,to:now))";
-        $g = "(refreshInterval:(display:Off,pause:!f,section:0,value:0),time:(from:'".$from_time."',mode:absolute,to:'".$to_time."'))";
-        //$g="(refreshInterval:(display:Off,pause:!f,section:0,value:0),time:(from:'2015-09-04T22:00:00.000Z',mode:absolute,to:'2015-10-04T22:00:00.000Z'))";
-        //timestamp:%5Bnow-2d%20TO%20now-1d%5D
-        //$g="(refreshInterval:(display:Off,pause:!f,section:0,value:0),time:(from:'".$from_time."T22:00:00.000Z',mode:absolute,to:'".$to_time."T22:00:00.000Z'))";
-        //http://agimus-ng.univ-lille1.fr:5601/#/visualize/edit/annuaire-nb_pers_affectations?embed&_g=(refreshInterval:(display:Off,pause:!f,section:0,value:0),time:(from:now-30d,mode:quick,to:now))&_a=(filters:!(),linked:!f,query:(query_string:(analyze_wildcard:!t,query:'_type:ldap-stat%20AND%20attribut:supannEntiteAffectationPrincipale%20AND%20timestamp:%5Bnow-2d%20TO%20now-1d%5D')),vis:(aggs:!((id:'1',params:(field:count),schema:metric,type:max),(id:'2',params:(field:value,order:desc,orderBy:'1',size:20),schema:segment,type:terms)),listeners:(),params:(addLegend:!t,addTimeMarker:!f,addTooltip:!t,defaultYExtents:!f,mode:stacked,scale:linear,setYExtents:!f,shareYAxis:!t,times:!(),yAxis:()),type:histogram))
 
         parse_str($urlqueryfragment, $get_array);
         $a="";
         if(isset($get_array["_a"])) $a=$get_array["_a"];
         elseif(isset($get_array["amp;_a"])) $a=$get_array["amp;_a"];
+
+        if(isset($get_array["_g"])) $g=$get_array["_g"];
+        elseif(isset($get_array["amp;_g"])) $g=$get_array["amp;_g"];
+
+	if(isset($g)) {
+		$g = preg_replace(
+				array("/refreshInterval:\([^\)]*\)/","/time:\([^\)]*\)/"),
+				array("refreshInterval:(display:Off,pause:!f,section:0,value:0)","time:(from:'".$from_time."',mode:absolute,to:'".$to_time."')"),
+				$g);
+		if (strpos( $g , "refreshInterval:(" ) === false ) {
+			$g .= "refreshInterval:(display:Off,pause:!f,section:0,value:0)";
+		}
+		if (strpos( $g , "time:(" ) === false ) {
+			$g .= "time:(from:'".$from_time."',mode:absolute,to:'".$to_time."')";
+		}
+	}
+	else {
+		$g = "(refreshInterval:(display:Off,pause:!f,section:0,value:0),time:(from:'".$from_time."',mode:absolute,to:'".$to_time."'))";
+	}
 
         //preg_match('/timestamp:\[(.*) TO (.*)\]/', $a, $matches);
 
@@ -232,9 +244,9 @@ class Dashboard {
         return $new_url;
     }
 
-		function clean_fragment($fragment) {
-			return str_replace( '"' ,  '%22' , $fragment );
-		}
+    function clean_fragment($fragment) {
+      return str_replace( '"' ,  '%22' , $fragment );
+    }
 
     function unparse_url($parsed_url) { 
       $scheme   = isset($parsed_url['scheme']) ? $parsed_url['scheme'] . '://' : ''; 
