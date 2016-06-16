@@ -44,7 +44,9 @@ function get_user_dashboards($user) {
     } else {
         $query = 'SELECT * FROM `dashboard` WHERE `roles` = ""';
         foreach ($user->getRoles() as $role) {
-            $query = $query.' OR `roles` like "'.$role.'"';
+            if (trim($role)!=false) {
+                $query = $query.' OR `roles` like "%'.$role.'%"';
+            }
         }
         $result = mysql_query($query);
     }
