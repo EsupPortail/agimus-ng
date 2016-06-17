@@ -75,8 +75,18 @@
             redirect_to_default_dashboard_action($user);
         } else show_dashboard_action(-1);
     } elseif(preg_match(','.$root_uri.'/index.php/dashboard/(?P<id>\d+)/,', $uri, $matches)) {
-        //echo $uri."<br/>";        
-        show_dashboard_action($matches['id']);
+        $autorise = false;
+        foreach ($dashboards as $dashboard) {
+            if ($dashboard->getId() == $matches['id']) {
+                $autorise = true;
+                show_dashboard_action($matches['id']);
+                break;
+            }
+        }
+        if (! $autorise) {
+            header('Status: 403 Forbidden');
+            echo '<html><body>'.$root_uri.'<h1>Forbidden</h1></body></html>';
+        }
     } elseif(preg_match(','.$root_uri.'/index.php/graphe/(?P<id>\d+)/,', $uri, $matches)) {
         show_graphe_action($matches['id']);
     } else {
