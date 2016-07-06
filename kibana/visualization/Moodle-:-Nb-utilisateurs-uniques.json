@@ -1,0 +1,9 @@
+{
+    "visState": "{\"type\":\"metric\",\"params\":{\"fontSize\":60},\"aggs\":[{\"id\":\"1\",\"type\":\"cardinality\",\"schema\":\"metric\",\"params\":{\"field\":\"uid\"}}],\"listeners\":{}}",
+    "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"logstash-*\",\"query\":{\"query_string\":{\"query\":\"_type:moodledblog\",\"analyze_wildcard\":true}},\"filter\":[]}"
+    },
+    "version": 1,
+    "description": "",
+    "title": "Moodle : Nb utilisateurs uniques"
+}

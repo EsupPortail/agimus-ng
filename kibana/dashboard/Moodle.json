@@ -1,0 +1,11 @@
+{
+    "hits": 0,
+    "timeRestore": false,
+    "description": "",
+    "title": "Moodle",
+    "panelsJSON": "[{\"col\":8,\"id\":\"Moodle-:-les-10-cours-les-plus-consult\u00e9s\",\"row\":9,\"size_x\":5,\"size_y\":4,\"type\":\"visualization\"},{\"col\":1,\"id\":\"Moodle-:-modules-les-plus-utilis\u00e9s\",\"row\":4,\"size_x\":7,\"size_y\":4,\"type\":\"visualization\"},{\"col\":7,\"id\":\"Moodle-:-Nb-utilisateurs-uniques\",\"row\":1,\"size_x\":3,\"size_y\":2,\"type\":\"visualization\"},{\"col\":1,\"id\":\"Moodle-:-proportion-de-consultation-de-chaque-niv1\",\"row\":14,\"size_x\":12,\"size_y\":3,\"type\":\"visualization\"},{\"col\":1,\"id\":\"Moodle-:-Provenance\",\"row\":17,\"size_x\":4,\"size_y\":4,\"type\":\"visualization\"},{\"col\":5,\"id\":\"Moodle-:-connexions-par-jour\",\"row\":17,\"size_x\":8,\"size_y\":4,\"type\":\"visualization\"},{\"col\":8,\"id\":\"Moodle-cours-:-Nb-cours-par-niv1\",\"row\":4,\"size_x\":5,\"size_y\":4,\"type\":\"visualization\"},{\"col\":1,\"id\":\"Moodle-cours-:-\u00c9volution-cours-actif-slash-inactif\",\"row\":21,\"size_x\":6,\"size_y\":5,\"type\":\"visualization\"},{\"col\":10,\"id\":\"Moodle-:-Nb-connexions\",\"row\":1,\"size_x\":3,\"size_y\":2,\"type\":\"visualization\"},{\"col\":7,\"id\":\"Moodle-cours-:-\u00c9volution-nb-enseignants-slash-niv1\",\"row\":21,\"size_x\":6,\"size_y\":5,\"type\":\"visualization\"},{\"col\":1,\"id\":\"Moodle-cours-:-\u00c9volution-nb-cours-slash-niv1\",\"row\":9,\"size_x\":7,\"size_y\":4,\"type\":\"visualization\"},{\"col\":1,\"id\":\"Moodle-:-COURS\",\"row\":8,\"size_x\":12,\"size_y\":1,\"type\":\"visualization\"},{\"col\":1,\"id\":\"Moodle-:-CONNEXIONS\",\"row\":3,\"size_x\":12,\"size_y\":1,\"type\":\"visualization\"},{\"col\":1,\"id\":\"Moodle-:-CONSULTATIONS\",\"row\":13,\"size_x\":12,\"size_y\":1,\"type\":\"visualization\"},{\"col\":1,\"id\":\"PERIODE\",\"row\":1,\"size_x\":3,\"size_y\":2,\"type\":\"visualization\"},{\"col\":4,\"id\":\"Moodle-cours-:-Nb-cours\",\"row\":1,\"size_x\":3,\"size_y\":2,\"type\":\"visualization\"}]",
+    "version": 1,
+    "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"filter\":[{\"query\":{\"query_string\":{\"analyze_wildcard\":true,\"query\":\"*\"}}}]}"
+    }
+}

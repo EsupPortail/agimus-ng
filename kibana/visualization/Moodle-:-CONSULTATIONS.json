@@ -1,0 +1,9 @@
+{
+    "visState": "{\"type\":\"markdown\",\"params\":{\"markdown\":\"> ** CONSULTATIONS**\"},\"aggs\":[],\"listeners\":{}}",
+    "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"query\":{\"query_string\":{\"query\":\"*\",\"analyze_wildcard\":true}},\"filter\":[]}"
+    },
+    "version": 1,
+    "description": "",
+    "title": "Moodle : CONSULTATIONS"
+}

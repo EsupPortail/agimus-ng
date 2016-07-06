@@ -1,0 +1,9 @@
+{
+    "visState": "{\"type\":\"markdown\",\"params\":{\"markdown\":\"> ** CONNEXIONS **\"},\"aggs\":[],\"listeners\":{}}",
+    "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"query\":{\"query_string\":{\"analyze_wildcard\":true,\"query\":\"*\"}},\"filter\":[]}"
+    },
+    "version": 1,
+    "description": "",
+    "title": "Moodle : CONNEXIONS"
+}

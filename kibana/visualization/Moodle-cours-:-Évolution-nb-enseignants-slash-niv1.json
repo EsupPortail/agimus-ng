@@ -1,0 +1,9 @@
+{
+    "visState": "{\n  \"aggs\": [\n    {\n      \"id\": \"1\",\n      \"params\": {\n        \"field\": \"mdl_enseignants.raw\",\n        \"json\": \"{\\\"precision_threshold\\\":1000}\"\n      },\n      \"schema\": \"metric\",\n      \"type\": \"cardinality\"\n    },\n    {\n      \"id\": \"2\",\n      \"params\": {\n        \"customInterval\": \"2h\",\n        \"extended_bounds\": {},\n        \"field\": \"@timestamp\",\n        \"interval\": \"d\",\n        \"min_doc_count\": 1\n      },\n      \"schema\": \"segment\",\n      \"type\": \"date_histogram\"\n    },\n    {\n      \"id\": \"3\",\n      \"params\": {\n        \"field\": \"mdl_nom_niv1\",\n        \"order\": \"desc\",\n        \"orderBy\": \"1\",\n        \"size\": 10\n      },\n      \"schema\": \"group\",\n      \"type\": \"terms\"\n    }\n  ],\n  \"listeners\": {},\n  \"params\": {\n    \"addLegend\": true,\n    \"addTimeMarker\": false,\n    \"addTooltip\": true,\n    \"defaultYExtents\": false,\n    \"interpolate\": \"linear\",\n    \"mode\": \"stacked\",\n    \"scale\": \"linear\",\n    \"setYExtents\": false,\n    \"shareYAxis\": true,\n    \"smoothLines\": false,\n    \"times\": [],\n    \"yAxis\": {}\n  },\n  \"type\": \"area\"\n}",
+    "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\n  \"index\": \"logstash-*\",\n  \"query\": {\n    \"query_string\": {\n      \"analyze_wildcard\": true,\n      \"query\": \"_type:coursmoodle\"\n    }\n  },\n  \"filter\": []\n}"
+    },
+    "version": 1,
+    "description": "",
+    "title": "Moodle cours : \u00c9volution nb enseignants / niv1"
+}

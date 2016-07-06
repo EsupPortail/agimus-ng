@@ -1,0 +1,9 @@
+{
+    "visState": "{\"type\":\"metric\",\"params\":{\"fontSize\":\"18\",\"spyPerPage\":10},\"aggs\":[{\"id\":\"1\",\"type\":\"min\",\"schema\":\"metric\",\"params\":{\"field\":\"@timestamp\"}},{\"id\":\"2\",\"type\":\"max\",\"schema\":\"metric\",\"params\":{\"field\":\"@timestamp\"}}],\"listeners\":{}}",
+    "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"logstash-*\",\"query\":{\"query_string\":{\"analyze_wildcard\":true,\"query\":\"*\"}},\"filter\":[]}"
+    },
+    "version": 1,
+    "description": "",
+    "title": "PERIODE"
+}
