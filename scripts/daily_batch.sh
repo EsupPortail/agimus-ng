@@ -81,14 +81,41 @@ fi
 echo ""
 
 echo "$LINE_SEPARATOR"
-echo "#### Import ARCHE logs : "`date +'%F %R'`
-if [ -f "$REP_LOGS/arche-access.log.gz" ]; then
-	echo "#### Number of lines in file "`zcat $REP_LOGS/arche-access.log.gz | wc -l`
-	zcat $REP_LOGS/arche-access.log.gz | $LOGSTASH_DIR/bin/logstash --quiet -f $BUILD_HOME/logstash/logstash-moodle.conf >&2
+echo "#### Import Moodle logs : "`date +'%F %R'`
+if [ -f "$REP_LOGS/moodle-access.log.gz" ]; then
+	echo "#### Number of lines in file "`zcat $REP_LOGS/moodle-access.log.gz | wc -l`
+	zcat $REP_LOGS/moodle-access.log.gz | $LOGSTASH_DIR/bin/logstash --quiet -f $BUILD_HOME/logstash/logstash-moodle.conf >&2
 else 
-        echo "ERR: NO file logs ARCHE" >&2
+        echo "ERR: NO file logs Moodle" >&2
 fi
 echo ""
+
+####
+#
+# You can also get moodle log from db
+#
+####
+#    echo "$LINE_SEPARATOR"
+#    echo "#### Import COURS Moodle : "`date +'%F %R'`
+#    if [ -f "$REP_LOGS/coursMoodle.log" ]; then
+#        echo "#### Number line in file $DATE/coursMoodle.log : "`cat $REP_LOGS/coursMoodle.log | wc -l`
+#        ## On ajoute en fin de ligne un timestamp postérieur pour être certain que les cours soient dans l'index attendu
+#        sed "s/$/;[time:`date --date="$DATE +5 hours" +%s`]/"  $REP_LOGS/coursMoodle.log | $LOGSTASH_DIR/bin/logstash --quiet -f $BUILD_HOME/conf/logstash-coursmoodle.conf >&2
+#    else
+#            echo -e "\n------\n-\n-  ERR: NO file logs COURS Moodle\n-\n------\n" >&2
+#    fi
+#    echo ""
+#
+#    echo "$LINE_SEPARATOR"
+#    echo "#### Import Moodle logs FROM DB : "`date +'%F %R'`
+#    echo -e "\nLes logs du traitement se trouvent dans le fichier "$REP_LOGS"/import_moodle.log"
+#    $BUILD_HOME/scripts/moodle/import_moodle_logs.sh $DATE
+#    LOGSIZE=`wc -l < "$REP_LOGS"/import_moodle.log`
+#    if [ $LOGSIZE -ne 0 ];then
+#        echo -e "\nATTENTION :\nTaille du fichier "$REP_LOGS"/import_moodle.log : "$LOGSIZE"\n"
+#    fi
+
+
 
 echo "$LINE_SEPARATOR"
 echo "#### Clean ES index : older CAS-TRACE : "`date +'%F %R'`

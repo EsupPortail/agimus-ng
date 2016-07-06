@@ -59,6 +59,13 @@ if os.path.isdir(script_dir):
 				with open(script_dir+"/"+script_file) as orig_file:
 					for line in orig_file:
 						build_file.write(line.replace('__VOS_ATTRIBUTS__', attr).replace('__VOS_ATTRIBUTS_HASHES__', attr_hash))
+		elif os.path.isdir(script_dir+"/"+script_file):
+			# Only copy files in subdirectories
+			if not os.path.exists(build_dir+"/scripts/"+script_file):
+				os.makedirs(build_dir+"/scripts/"+script_file)
+			for sub_script_file in os.listdir(script_dir+"/"+script_file):
+				shutil.copy(script_dir+"/"+script_file+"/"+sub_script_file,build_dir+"/scripts/"+script_file+"/"+sub_script_file)
+				
 else:
 	print "Warning: the directory "+script_dir+" doesn't exist"
 
