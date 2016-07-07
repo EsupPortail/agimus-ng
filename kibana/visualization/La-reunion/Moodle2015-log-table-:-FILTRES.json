@@ -1,0 +1,10 @@
+{
+    "visState": "{\"type\":\"markdown\",\"params\":{\"markdown\":\"> **FILTRES :**\"},\"aggs\":[],\"listeners\":{}}",
+    "description": "",
+    "title": "Moodle2015 log table : FILTRES",
+    "uiStateJSON": "{}",
+    "version": 1,
+    "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"query\":{\"query_string\":{\"query\":\"*\",\"analyze_wildcard\":true}},\"filter\":[]}"
+    }
+}
