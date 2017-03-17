@@ -1,6 +1,10 @@
 # Agimus nouvelle génération ou Agimus-NG
 <img src="https://www.esup-portail.org/sites/esup-portail.org/files/logo-esup%2Baccroche_2.png"/>
 
+## Version 2.x
+
+Cette version est prévue pour être utilisée avec une version 2.x d'elasticsearch et logstash. Utilisez la branche 1.x d'agimus si vous souhaitez utiliser la version 1 des briques ELK.
+
 ## Vers un audimat des services.
 
 Qui utilise quel service ? Quand ? À quel rythme ? L’intérêt des indicateurs mis en place par l’atelier est de mieux connaitre l’usage des différents services qui sont déployés dans les établissements et par le fait de mieux en organiser l’accès et de les faire évoluer.
@@ -25,5 +29,5 @@ Vous trouverez ici les principaux fichiers utilisés pour mettre en place Agimus
 * [scripts](scripts)
 * [logstash](logstash)
 * [kibana](kibana)
-* 
+*
 Chaque dossier contient à sa racine une rapide description de son contenu mais pour obtenir plus de détails, rendez vous sur la page wiki du projet.
