@@ -16,21 +16,90 @@ function close_database_connection($link) {
     mysql_close ($link);
 }
 
+function open_ldap_connection() {
+    global $index_path;
+    require $index_path.'/config/config.php';
+    
+	$ldapLink = ldap_connect($LDAP['HOST']);
+	if (!$ldapLink) die("Erreur : l'application est indisponible (erreur connexion annuaire).");
+	@ldap_start_tls ( $ldapLink );
+	if (!ldap_bind($ldapLink, $LDAP['BIND_DN'], $LDAP['BIND_PASSWORD'])) die("Erreur : l'application est indisponible (erreur authentification annuaire).");
 
+	return $ldapLink;
+	
+}
+
+function close_ldap_connection($ldapLink) {
+    @ldap_close($ldapLink);
+}
 
 /****** USER ****/
 
 function get_or_create_user($username, $email="") {
     global $default_admin_username;
-    $link = open_database_connection();
+    global $index_path;
+    require $index_path.'/config/config.php';
+    
+	$link = open_database_connection();
     $query = 'SELECT `id`, `username`, `password`, `email`, `roles` FROM user WHERE username = "'.$username.'"';
     $result=mysql_query($query);
     if (mysql_num_rows($result)==0) {
         //create user
         if($username==$default_admin_username) $user = create_new_user($username, $email, "ROLE_ADMIN");
-        else $user = create_new_user($username, $email);
+        else {
+			// connect to ldap to get metadata en roles
+			$ldapLink = open_ldap_connection();
+			$search_result = @ldap_search($ldapLink, $LDAP['PEOPLE_BASE_DN'], "(uid=".$username.")", $LDAP['PEOPLE_ATTRS']);
+			if (!$search_result) die("Erreur : l'application est indisponible (erreur récuperation d'information d'annuaire).");
+
+			$entries = ldap_get_entries($ldapLink, $search_result);
+			
+			if($entries['count'] > 1) die("Erreur : l'application est indisponible (erreur récuperation d'information d'annuaire plus d'une personne).");
+
+			// get mail from ldap
+			$email = $entries[0]['mail'][0];
+			
+			// get roles from ldap (grouper attributs)
+			$ldap_roles= array();
+			for($i=0; $i < $entries[0][$LDAP['GROUP_ATTRS']]['count']; $i++) {
+				foreach ($user_roles_mapping as $roleKey => $role_value){	
+					if($entries[0][$LDAP['GROUP_ATTRS']][$i] == $role_value) {
+						$ldap_roles[] = $roleKey;
+					}
+				}				
+			}			
+			close_ldap_connection($ldapLink);
+			$user = create_new_user($username, $email);
+			if(!empty($ldap_roles)){
+				$user->setRoles(join($ldap_roles, ','));	
+			}
+		}
     } else {
+		$ldapLink = open_ldap_connection();
+		$search_result = @ldap_search($ldapLink, $LDAP['PEOPLE_BASE_DN'], "(uid=".$username.")", $LDAP['PEOPLE_ATTRS']);
+		if (!$search_result) die("Erreur : l'application est indisponible (erreur récuperation d'information d'annuaire).");
+		$entries = ldap_get_entries($ldapLink, $search_result);
+			
+		if($entries['count'] > 1) die("Erreur : l'application est indisponible (erreur récuperation d'information d'annuaire plus d'une personne).");
+
+		// get mail from ldap
+		$email = $entries[0]['mail'][0];
+			
+		// get roles from ldap (grouper attributs)
+		$ldap_roles= array();
+		for($i=0; $i < $entries[0][$LDAP['GROUP_ATTRS']]['count']; $i++) {
+			foreach ($user_roles_mapping as $roleKey => $role_value){	
+				if($entries[0][$LDAP['GROUP_ATTRS']][$i] == $role_value) {
+					$ldap_roles[] = $roleKey;
+				}
+			}				
+		}			
+		close_ldap_connection($ldapLink);
+		
         $user = mysql_fetch_object($result, 'User');
+		$currentRoles = $user->getRoles();
+		$full_roles = array_unique(array_merge($currentRoles, $ldap_roles));		
+		$user->setRoles(join($full_roles, ','));		
     }
     close_database_connection($link);
     return $user;
