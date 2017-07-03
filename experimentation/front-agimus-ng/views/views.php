@@ -12,7 +12,7 @@
             $dashboard = get_dashboard_by_id($id);
         }
         $startDate = isset($_GET['startDate']) ? $_GET['startDate'] : date("Y-m-d", mktime(0, 0, 0, date("m")-1, date("d")-1,   date("Y"))) ;
-        $endDate = isset($_GET['endDate']) ? $_GET['endDate'] : date("Y-m-d", mktime(0, 0, 0, date("m"), date("d")-1,   date("Y"))) ;
+        $endDate = isset($_GET['endDate']) ? $_GET['endDate'] : date("Y-m-d", mktime(0, 0, 0, date("m"), date("d")+1,   date("Y"))) ;  
         require $index_path.'/templates/dashboard.php';
         
         

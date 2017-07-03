@@ -51,7 +51,7 @@
         <div id="page-content-wrapper">
             <div class="container-fluid">
               <!-- Page Header -->
-              <div class="row">
+              <div id="headtitle" class="row">
                   <div class="col-lg-12">
                       <div class="pull-right">
                         <a href="<?php echo $root_uri; ?>/index.php?logout=" class="btn btn-default" >Déconnexion</a>
@@ -63,8 +63,7 @@
                       <?php if(isset($dashboard)) { ?>
                       <h1 class="page-header">Agimus NG
                           <small>Tableau de bord "<?php echo $dashboard->getTitle() ?>".</small>
-                      </h1>
-                      <p>&nbsp;<?php echo $dashboard->getDescription() ?></p>
+                      </h1>						  
                       <?php } else { ?>
                         <h1 class="page-header">Agimus NG
                           <small>Vous n'avez accès à aucun tableau de bord.</small>
@@ -77,7 +76,7 @@
               <!-- Projects Row -->
               <?php if(isset($dashboard)) { ?>
               <?php if($dashboard->getUrl()!="") { ?>
-              <iframe src="<?php echo $dashboard->getCheckedUrl($startDate, $endDate); ?>"  style="display:block;width:100%;max-width:100%;height:100%;"/> </iframe>
+				<iframe id="dashboard-frame" allowfullscreen src="<?php echo $dashboard->getCheckedUrl($startDate, $endDate); ?>"  style="display:block;width:100%;max-width:100%;height:100%;"/> </iframe>
               <?php } else { ?>
               <div class="row">
               <?php foreach($dashboard->getGraphes() as $index=>$graphe): ?>
@@ -104,8 +103,10 @@
             <footer>
                 <div class="row text-center">
                     <div class="col-lg-12">
-                        <p>Université Lille 1</p>
-                        <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
+                        <a href="#frame-toggle" class="btn btn-default" id="frame-toggle">Plein écran</a>
+						<a href="#framesize-toggle" class="btn btn-default" id="framesize-toggle">Toute la fenêtre</a>
+						<a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Réduire le Menu</a>
+						<p>Esup-Portail</p>                        
                     </div>
                 </div>
                 <!-- /.row -->
@@ -134,6 +135,53 @@
         e.preventDefault();
         $("#wrapper").toggleClass("toggled");
     });
+	
+	$("#frame-toggle").click(function(e) {
+		e.preventDefault();		
+		var element = document.getElementById("dashboard-frame");
+
+		if (element.requestFullScreen) {
+			element.requestFullScreen();
+		} else if (element.mozRequestFullScreen) {
+			element.mozRequestFullScreen();
+		} else if (element.webkitRequestFullScreen) {
+			element.webkitRequestFullScreen();
+		} else if (element.msRequestFullscreen) {
+			element.msRequestFullscreen();
+		}
+		else {
+			alert("désolé");
+		}
+	});
+	
+	var fullScreen = false;
+	$("#framesize-toggle").click(function(e) {
+		e.preventDefault();		
+		
+			
+		$("#wrapper").toggleClass("toggled");
+		$(".page-header").toggle();
+		$("#frame-toggle").toggle();
+		$("#menu-toggle").toggle();
+		$("hr").toggle();
+		
+		var wHeight = $(window).height();
+		
+		var frameCurrentHeight = $("#dashboard-frame").css("height");
+		frameCurrentHeight = frameCurrentHeight.replace('px', '');
+		
+		console.log("TESTJM : "+frameCurrentHeight+" -- "+(wHeight-70))
+		if(fullScreen) {
+			$("#dashboard-frame").css("height","100%");
+			fullScreen = false;
+		}			
+		else {	
+			$("#dashboard-frame").css("height",(wHeight-70)+"px");
+			fullScreen = true;
+		}
+		
+		
+	});
     </script>
 
     <script type="text/javascript">
@@ -143,7 +191,7 @@
         startDate: '<?php echo $startDate; ?>',
         endDate: '<?php echo $endDate; ?>',
         minDate: '2015-02-01',
-        maxDate: '<?php echo $endDate; ?>',
+        maxDate: '<?php echo date("Y-m-d", mktime(0, 0, 0, date("m"), date("d")+1,   date("Y"))) ; ?>',
         //dateLimit: { days: 60 },
         showDropdowns: true,
         showWeekNumbers: true,
