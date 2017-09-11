@@ -1,0 +1,5 @@
+{
+        "visState" : "{\"type\":\"metric\",\"params\":{\"fontSize\":\"50\"},\"aggs\":[{\"id\":\"1\",\"type\":\"cardinality\",\"schema\":\"metric\",\"params\":{\"field\":\"uid\"}}],\"listeners\":{}}",
+        "kibanaSavedObjectMeta" : {
+          "searchSourceJSON" : "{\"index\":\"logstash-*\",\"query\":{\"query_string\":{\"query\":\"_type:bulstats AND nbfiles:>10  AND @timestamp:[now-1d TO now]\",\"analyze_wildcard\":true}},\"filter\":[]}"
+        }

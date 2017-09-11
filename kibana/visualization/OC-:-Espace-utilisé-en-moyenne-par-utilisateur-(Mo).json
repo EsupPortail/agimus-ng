@@ -1,0 +1,9 @@
+{
+        "visState" : "{\"type\":\"metric\",\"params\":{\"fontSize\":60,\"spyPerPage\":10},\"aggs\":[{\"id\":\"1\",\"type\":\"avg\",\"schema\":\"metric\",\"params\":{\"field\":\"quotaused\",\"json\":\"{\\n\\\"script\\\" : \\\"_value/1024/1024\\\"\\n}\"}}],\"listeners\":{}}",
+        "kibanaSavedObjectMeta" : {
+          "searchSourceJSON" : "{\"index\":\"logstash-*\",\"query\":{\"query_string\":{\"query\":\"_type:bulstats AND @timestamp:[now-1d TO now]\",\"analyze_wildcard\":true}},\"filter\":[]}"
+        },
+        "version" : 1,
+        "description" : "",
+        "title" : "BUL : Espace utilisé en moyenne par utilisateur (Mo)"
+      }

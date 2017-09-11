@@ -133,6 +133,24 @@ fi
 echo ""
 
 
+####
+#
+# Traitement des infos owncloud
+# Les infos sont générées par le script cron_cnx_bul.sh lancé sur la machine owncloud
+#
+####
+
+echo "$LINE_SEPARATOR"
+echo "#### Import OC-Stats logs : "`date +'%F %R'`
+if [ -f "$REP_LOGS/cnx-oc.log" ]; then
+		echo "#### Number line in file $DATE/cnx-oc.log : "`cat $REP_LOGS/cnx-oc.log | wc -l`
+		## On ajoute en fin de ligne un timestamp postérieur pour être certain que les logs soient considérés comme du jour
+		sed "s/$/;[time:`date --date="$DATE +5 hours" +%s`]/" $REP_LOGS/cnx-oc.log | $LOGSTASH_DIR/bin/logstash -w8 --quiet -f $BUILD_HOME/logstash/logstash-oc-stats.conf >&2
+else
+				echo -e "\n------\n-\n-  ERR : NO file logs OC-Stats\n-\n------\n" >&2
+fi
+echo ""
+
 
 echo "$LINE_SEPARATOR"
 echo "#### Clean ES index : older CAS-TRACE : "`date +'%F %R'`
