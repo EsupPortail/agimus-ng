@@ -115,6 +115,23 @@ echo ""
 #        echo -e "\nATTENTION :\nTaille du fichier "$REP_LOGS"/import_moodle.log : "$LOGSIZE"\n"
 #    fi
 
+####
+#
+# Traitement des logs Antispam Renater
+#
+####
+
+echo "$LINE_SEPARATOR"
+echo "#### Import Antispam Renater logs : "`date +'%F %R'`
+if [ -f "$REP_LOGS/ASrenater.log.bz2" ]; then
+    echo "#### Number line in file $DATE/ASrenater.log.bz2 : "`bzcat $REP_LOGS/ASrenater.log.bz2 | wc -l`
+    # On ajoute l'année aux débuts de lignes de log
+    bzcat $REP_LOGS/ASrenater.log.bz2 | sed "s/.*/`date --date="$DATE" +%Y`-&/" | $LOGSTASH_DIR/bin/logstash -w8 --quiet -f $BUILD_HOME/conf/logstash-renaterantispam.conf >&2
+else
+        echo -e "\n------\n-\n-  ERR : NO file logs antispam Renater\n-\n------\n" >&2
+fi
+echo ""
+
 
 
 echo "$LINE_SEPARATOR"
