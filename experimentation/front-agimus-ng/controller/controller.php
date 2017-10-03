@@ -7,13 +7,13 @@ require $index_path.'/entity/Dashboard.php';
 function open_database_connection() {
     global $index_path;
     require $index_path.'/config/config.php';
-    $link = mysql_connect($db_host,$db_user,$db_password);
-    mysql_select_db($db_name,$link);
+    $link = mysqli_connect($db_host,$db_user,$db_password);
+    mysqli_select_db($link,$db_name);
     return $link;
 }
 
 function close_database_connection($link) {
-    mysql_close ($link);
+    mysqli_close ($link);
 }
 
 function open_ldap_connection() {
@@ -42,8 +42,8 @@ function get_or_create_user($username, $email="") {
     
 	$link = open_database_connection();
     $query = 'SELECT `id`, `username`, `password`, `email`, `roles` FROM user WHERE username = "'.$username.'"';
-    $result=mysql_query($query);
-    if (mysql_num_rows($result)==0) {
+    $result=mysqli_query($link,$query);
+    if (mysqli_num_rows($result)==0) {
         //create user
         if($username==$default_admin_username) $user = create_new_user($username, $email, "ROLE_ADMIN");
         else {
@@ -96,7 +96,7 @@ function get_or_create_user($username, $email="") {
 		}			
 		close_ldap_connection($ldapLink);
 		
-        $user = mysql_fetch_object($result, 'User');
+        $user = mysqli_fetch_object($result, 'User');
 		$currentRoles = $user->getRoles();
 		$full_roles = array_unique(array_merge($currentRoles, $ldap_roles));		
 		$user->setRoles(join($full_roles, ','));		
@@ -108,7 +108,7 @@ function get_or_create_user($username, $email="") {
 function get_user_dashboards($user) {
     $link = open_database_connection();
     if($user->isAdmin()){
-        $result = mysql_query('SELECT * FROM `dashboard`');
+        $result = mysqli_query($link,'SELECT * FROM `dashboard`');
         
     } else {
         $query = 'SELECT * FROM `dashboard` WHERE `roles` = ""';
@@ -117,10 +117,10 @@ function get_user_dashboards($user) {
                 $query = $query.' OR `roles` like "%'.$role.'%"';
             }
         }
-        $result = mysql_query($query);
+        $result = mysqli_query($link,$query);
     }
     $dashboards = array();
-    while($dashboard = mysql_fetch_object($result, 'Dashboard')) {
+    while($dashboard = mysqli_fetch_object($result, 'Dashboard')) {
         $dashboard = $dashboard->setGraphe(get_graphe_from_dashboard($dashboard));
         $dashboards[] = $dashboard;
     }
@@ -140,13 +140,13 @@ function get_graphe_from_dashboards($dashboards) {
     . "JOIN `dashboard`\n"
     . "ON `dashboard_graphe`.`dashboard_id` = `dashboard`.`id`\n"
     . "WHERE `dashboard`.`id` in (".implode(",", $list_dashboard_id).")";
-    if($result=mysql_query($sql)) {
+    if($result=mysqli_query($link,$sql)) {
         $graphes = array();
-        while($graphe = mysql_fetch_object($result, 'Graphe')) {
+        while($graphe = mysqli_fetch_object($result, 'Graphe')) {
             $graphes[] = $graphe;
         }
     } else {
-        return "<br />Error deleting record: " . mysql_error();
+        return "<br />Error deleting record: " . mysqli_error();
     }
     close_database_connection($link);
     return $graphes;
@@ -156,9 +156,9 @@ function get_graphe_from_dashboards($dashboards) {
 function get_all_user() {
     $link = open_database_connection();
     $query = 'SELECT `id`, `username`, `password`, `email`, `roles` FROM user ';
-    $result=mysql_query($query);
+    $result=mysqli_query($link,$query);
     $users = array();
-    while($user = mysql_fetch_object($result, 'User')) {
+    while($user = mysqli_fetch_object($result, 'User')) {
         $users[] = $user;
     }
     close_database_connection($link);
@@ -169,8 +169,8 @@ function get_user_by_id($id) {
     $link = open_database_connection();
     $id = intval($id);
     $query = 'SELECT `id`, `username`, `password`, `email`, `roles` FROM user WHERE id = '.$id;
-    $result=mysql_query($query);
-    $user = mysql_fetch_object($result, 'User');
+    $result=mysqli_query($link,$query);
+    $user = mysqli_fetch_object($result, 'User');
     close_database_connection($link);
     return $user;
 }
@@ -179,12 +179,12 @@ function delete_user_by_id($id) {
     $link = open_database_connection();
     $id = intval($id);
     $query = 'DELETE FROM `user` WHERE `user`.`id` = '.$id;
-    if(mysql_query($query)) {
+    if(mysqli_query($link,$query)) {
         close_database_connection($link);
         return "ok";
     } else {
         close_database_connection($link);
-        return "<br />Error deleting record: " . mysql_error();
+        return "<br />Error deleting record: " . mysqli_error();
     }
 }
 
@@ -200,12 +200,12 @@ function create_new_user($username, $email=null, $roles="") {
         $email = addslashes(stripslashes(trim(htmlspecialchars($email))));
         $sql_insert = 'INSERT INTO `user` (`id`, `username`, `password`, `email`, `roles`) VALUES (NULL, \''.$username.'\', NULL, \''.$email.'\', \''.$roles.'\');';
     }
-    if(mysql_query($sql_insert)) {
+    if(mysqli_query($link,$sql_insert)) {
         $query = 'SELECT `id`, `username`, `password`, `email`, `roles` FROM user WHERE id = "'.mysql_insert_id().'"';
-        $result=mysql_query($query);
-        $user = mysql_fetch_object($result, 'User');
+        $result=mysqli_query($link,$query);
+        $user = mysqli_fetch_object($result, 'User');
     } else {
-        echo "<br />Error inserting record: " . mysql_error();
+        echo "<br />Error inserting record: " . mysqli_error();
     }
     close_database_connection($link);
     return $user;
@@ -224,12 +224,12 @@ function update_user($id, $username, $email=null, $roles="") {
         $email = addslashes(stripslashes(trim(htmlspecialchars($email))));
         $sql_update = 'UPDATE `user` SET `username` = \''.$username.'\', `email` = \''.$email.'\', `roles` = \''.$roles.'\'  WHERE `user`.`id` ='.$id.';';
     }
-    if(mysql_query($sql_update)) {
+    if(mysqli_query($link,$sql_update)) {
         $query = 'SELECT `id`, `username`, `password`, `email`, `roles` FROM user WHERE id = "'.$id.'"';
-        $result=mysql_query($query);
-        $user = mysql_fetch_object($result, 'User');
+        $result=mysqli_query($link,$query);
+        $user = mysqli_fetch_object($result, 'User');
     } else {
-        echo "<br />Error inserting record: " . mysql_error();
+        echo "<br />Error inserting record: " . mysqli_error();
     }
     close_database_connection($link);
     return $user;
@@ -241,22 +241,22 @@ function get_graphe_by_id($id) {
     $link = open_database_connection();
     $id = intval($id);
     $query = 'SELECT `id`, `title`, `url`, `description` FROM graphe WHERE id = '.$id;
-    if($result=mysql_query($query)) {
-        $graphe = mysql_fetch_object($result, 'Graphe');
+    if($result=mysqli_query($link,$query)) {
+        $graphe = mysqli_fetch_object($result, 'Graphe');
         close_database_connection($link);
         return $graphe;
     } else {
         close_database_connection($link);
-        return " " .mysql_error();
+        return " " .mysqli_error();
     }
 }
 
 function get_all_graphe() {
     $link = open_database_connection();
     $query = 'SELECT `id`, `title`, `url`, `description` FROM graphe ';
-    $result=mysql_query($query);
+    $result=mysqli_query($link,$query);
     $graphes = array();
-    while($graphe = mysql_fetch_object($result, 'Graphe')) {
+    while($graphe = mysqli_fetch_object($result, 'Graphe')) {
         $graphes[] = $graphe;
     }
     close_database_connection($link);
@@ -269,10 +269,10 @@ function create_new_graphe($title, $url, $description="") {
     $url = addslashes(stripslashes(trim(htmlspecialchars($url))));
     $description = addslashes(stripslashes(trim(htmlspecialchars($description))));
     $sql_insert = 'INSERT INTO `graphe` (`id`, `title`, `url`, `description`) VALUES (NULL, \''.$title.'\', \''.$url.'\', \''.$description.'\');';
-    if(mysql_query($sql_insert)) {
+    if(mysqli_query($link,$sql_insert)) {
         $graphe = get_graphe_by_id(mysql_insert_id());
     } else {
-        echo "<br />Error inserting record: " . mysql_error();
+        echo "<br />Error inserting record: " . mysqli_error();
     }
     close_database_connection($link);
     return $graphe;
@@ -286,10 +286,10 @@ function update_graphe($id, $title, $url, $description="") {
     $url = addslashes(stripslashes(trim(htmlspecialchars($url))));
     $description = addslashes(stripslashes(trim(htmlspecialchars($description))));
     $sql_update = 'UPDATE `graphe` SET `title` = \''.$title.'\', `url` = \''.$url.'\', `description` = \''.$description.'\'  WHERE `graphe`.`id` ='.$id.';';
-    if(mysql_query($sql_update)) {
+    if(mysqli_query($link,$sql_update)) {
         $graphe = get_graphe_by_id($id);
     } else {
-        echo "<br />Error updating record: " . mysql_error();
+        echo "<br />Error updating record: " . mysqli_error();
     }
     close_database_connection($link);
     return $graphe;
@@ -299,17 +299,17 @@ function delete_graphe_by_id($id) {
     $link = open_database_connection();
     $id = intval($id);
     $delete_query = 'DELETE FROM `dashboard_graphe` WHERE `graphe_id` = '.$id;
-    if(mysql_query($delete_query)) {
+    if(mysqli_query($link,$delete_query)) {
         $query = 'DELETE FROM `graphe` WHERE `id` = '.$id;
-        if(mysql_query($query)) {
+        if(mysqli_query($link,$query)) {
             close_database_connection($link);
             return "ok";
         } else {
-            return "<br />Error deleting record: " . mysql_error();
+            return "<br />Error deleting record: " . mysqli_error();
         }
     } else {
         close_database_connection($link);
-        return "<br />Error deleting record: " . mysql_error();
+        return "<br />Error deleting record: " . mysqli_error();
     }
 }
 
@@ -319,23 +319,23 @@ function get_dashboard_by_id($id) {
     $link = open_database_connection();
     $id = intval($id);
     $query = 'SELECT `id`, `title`, `description`, `roles`, `url` FROM dashboard WHERE id = '.$id;
-    if($result=mysql_query($query)) {
-        $dashboard = mysql_fetch_object($result, 'Dashboard');
+    if($result=mysqli_query($link,$query)) {
+        $dashboard = mysqli_fetch_object($result, 'Dashboard');
         close_database_connection($link);
         $dashboard = $dashboard->setGraphe(get_graphe_from_dashboard($dashboard));
         return $dashboard;
     } else {
         close_database_connection($link);
-        return " " .mysql_error();
+        return " " .mysqli_error();
     }
 }
 
 function get_all_dashboard() {
     $link = open_database_connection();
     $query = 'SELECT `id`, `title`, `description`, `roles`, `url` FROM dashboard';
-    $result=mysql_query($query);
+    $result=mysqli_query($link,$query);
     $dashboards = array();
-    while($dashboard = mysql_fetch_object($result, 'Dashboard')) {
+    while($dashboard = mysqli_fetch_object($result, 'Dashboard')) {
         $dashboard = $dashboard->setGraphe(get_graphe_from_dashboard($dashboard));
         $dashboards[] = $dashboard;
     }
@@ -351,9 +351,9 @@ function get_graphe_from_dashboard($dashboard) {
     . "JOIN `dashboard`\n"
     . "ON `dashboard_graphe`.`dashboard_id` = `dashboard`.`id`\n"
     . "WHERE `dashboard`.`id`= ".$dashboard->getId();
-    $result=mysql_query($sql);
+    $result=mysqli_query($link,$sql);
     $graphes = array();
-    while($graphe = mysql_fetch_object($result, 'Graphe')) {
+    while($graphe = mysqli_fetch_object($result, 'Graphe')) {
         $graphes[] = $graphe;
     }
     close_database_connection($link);
@@ -368,7 +368,7 @@ function create_new_dashboard($title, $description="", $roles, $graphes_id=array
     $roles = addslashes(stripslashes(trim(htmlspecialchars($roles))));
     $url = addslashes(stripslashes(trim(htmlspecialchars($url))));
     $sql_insert = 'INSERT INTO `dashboard` (`id`, `title`, `description`, `roles`, `url`) VALUES (NULL, \''.$title.'\', \''.$description.'\', \''.$roles.'\', \''.$url.'\');';
-    if(mysql_query($sql_insert)) {
+    if(mysqli_query($link,$sql_insert)) {
         if(isset($graphes_id) && !empty($graphes_id)) {
             $list_values="";
             $dashboard_id = mysql_insert_id();
@@ -377,16 +377,16 @@ function create_new_dashboard($title, $description="", $roles, $graphes_id=array
                 else $list_values.= ', '.'(\''.$dashboard_id.'\', \''.$graphe_id.'\')';
             }
             $sql_insert_dashboard_graphique = 'INSERT INTO `dashboard_graphe` (`dashboard_id`, `graphe_id`) VALUES '.$list_values.';';
-            if(mysql_query($sql_insert_dashboard_graphique)) {
+            if(mysqli_query($link,$sql_insert_dashboard_graphique)) {
                 $dashboard = get_dashboard_by_id($dashboard_id);
             } else {
-                $dashboard = "<br />Error inserting record: " . mysql_error();
+                $dashboard = "<br />Error inserting record: " . mysqli_error();
             }
         } else {
             $dashboard = get_dashboard_by_id(mysql_insert_id());
         }
     } else {
-        $dashboard = "<br />Error inserting record: " . mysql_error();
+        $dashboard = "<br />Error inserting record: " . mysqli_error();
     }
     close_database_connection($link);
     return $dashboard;
@@ -404,10 +404,10 @@ function update_dashboard($id, $title, $description="", $roles, $graphes_id=arra
     $sql_update = 'UPDATE `dashboard` SET `title` = \''.$title.'\', `roles` = \''.$roles.'\',`url` = \''.$url.'\', `description` = \''.$description.'\'   WHERE `id` = '.$id.';';
     
 
-    if(mysql_query($sql_update)) {
+    if(mysqli_query($link,$sql_update)) {
         //delete all previous relation
         $delete_query = 'DELETE FROM `dashboard_graphe` WHERE `dashboard_id` = '.$id;
-        if(mysql_query($delete_query)) {
+        if(mysqli_query($link,$delete_query)) {
             if(isset($graphes_id) && !empty($graphes_id)) {
                 $list_values="";
                 foreach($graphes_id as $index => $graphe_id) {
@@ -415,20 +415,20 @@ function update_dashboard($id, $title, $description="", $roles, $graphes_id=arra
                     else $list_values.= ', '.'(\''.$id.'\', \''.$graphe_id.'\')';
                 }
                 $sql_insert_dashboard_graphique = 'INSERT INTO `dashboard_graphe` (`dashboard_id`, `graphe_id`) VALUES '.$list_values.';';
-                if(mysql_query($sql_insert_dashboard_graphique)) {
+                if(mysqli_query($link,$sql_insert_dashboard_graphique)) {
                     $dashboard = get_dashboard_by_id($id);
                 } else {
-                    $dashboard = "<br />Error inserting record: " . mysql_error();
+                    $dashboard = "<br />Error inserting record: " . mysqli_error();
                 }
             } else {
                 $dashboard = get_dashboard_by_id($id);
             }
         } else {
-                $dashboard = "<br />Error deleting grpahe dashboard relations record: " . mysql_error();
+                $dashboard = "<br />Error deleting grpahe dashboard relations record: " . mysqli_error();
         }   
     } else {
-        echo "<br />Error updating record: " . mysql_error();
-        $dashboard = "<br />Error updating record: " . mysql_error();
+        echo "<br />Error updating record: " . mysqli_error();
+        $dashboard = "<br />Error updating record: " . mysqli_error();
     }
     close_database_connection($link);
     return $dashboard;
@@ -438,16 +438,16 @@ function delete_dashboard_by_id($id) {
     $link = open_database_connection();
     $id = intval($id);
     $delete_query = 'DELETE FROM `dashboard_graphe` WHERE `dashboard_id` = '.$id;
-    if(mysql_query($delete_query)) {
+    if(mysqli_query($link,$delete_query)) {
         $query = 'DELETE FROM `dashboard` WHERE `id` = '.$id;
-        if(mysql_query($query)) {
+        if(mysqli_query($link,$query)) {
             close_database_connection($link);
             return "ok";
         } else {
-            return "<br />Error deleting record: " . mysql_error();
+            return "<br />Error deleting record: " . mysqli_error();
         }
     } else {
         close_database_connection($link);
-        return "<br />Error deleting record: " . mysql_error();
+        return "<br />Error deleting record: " . mysqli_error();
     }
 }
