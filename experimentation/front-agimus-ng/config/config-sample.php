@@ -36,6 +36,7 @@
     $LDAP['BASE_DN'] = "dc=univ,dc=fr";
     $LDAP['PEOPLE_BASE_DN'] = "ou=people,".$LDAP['BASE_DN'];
     $LDAP['PEOPLE_ATTRS'] = array("uid", "mail",  "group");
+	// saisir les attributs en minuscule !!!
     $LDAP['GROUP_ATTRS'] = "group";
 
 
