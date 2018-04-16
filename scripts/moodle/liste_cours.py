@@ -141,7 +141,7 @@ for row in rows:
 		cat_niv1=tab_cat[cat_niv1]
 
 	#Affiche la ligne avec toutes les infos
-	 file.write("[cours:" + str(id_cours) + "];[nom_cours:" + str(nom_cours) + "];[cat:" + str(id_cat) + "];[enseignants:" + enseignants + "];[activites:" +  activites + "];[type_activites:" +  modules + "];[actif:" + actif + "];[niv2:" + str(cat_niv2)  + "];[niv1:" + str(cat_niv1) + "]\n")
+	file.write("[cours:" + str(id_cours) + "];[nom_cours:" + str(nom_cours) + "];[cat:" + str(id_cat) + "];[enseignants:" + enseignants + "];[activites:" +  activites + "];[type_activites:" +  modules + "];[actif:" + actif + "];[niv2:" + str(cat_niv2)  + "];[niv1:" + str(cat_niv1) + "]\n")
 
 
 #Fermeture DB
