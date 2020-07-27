@@ -1,30 +1,38 @@
-#!/home/agimus/bin/python
+#!/home/agimus/scripts/python
+# -*- coding: utf-8 -*-
 
 # kibana_export.py
-# Usage : scripts/kibana_export.py
+# Usage : scripts/kibana_export.py dossier_destination
 
-# To export quickly all the kibana objects in two directory : kibana/%d-%m-%y_visualization
-# and kibana/%d-%m-%y_dashboard
+# Permet d'exporter tous les  objets de l'index kibana ayant un des types
+#  'visualization', 'dashboard', 'index-pattern', 'query', 'config'
+#  Les objets sont enregistrés dans le dossier passé en paramètre
 
-# import sys, json, time
 import json, time
 from pathlib import Path
 from elasticsearch import Elasticsearch
 
-es = Elasticsearch(['http://agimus1.univ:9200/','http://agimus2.univ.fr:9200/'])
+objectsToExport = [ 'visualization', 'dashboard', 'index-pattern', 'query', 'config']
+cluster_ES = ['http://agimus1.univ.fr:9200/',
+					'http://agimus2.univ.fr:9200/'])
+index_kibana = '.kibana'
 
-curDate = time.strftime('%d-%m-%y', time.localtime())
-exportDir = Path('/home/agimus/export_kibana/' + curDate)
+if len(sys.argv) != 2:
+	print("Erreur : Vous devez spécifier le dossier vers lequel exporter")
+	print (f'Usage : {sys.argv[0]} dossier_destination')
+	sys.exit(2)
 
-objectsToExport = [ 'visualization', 'dashboard', 'index-pattern', 'query']
+es = Elasticsearch( cluster_ES )
 
-dump_obj = es.search(index='.kibana', body='{"size":2000}')
+exportDir = Path(sys.argv[1])
+
+dump_obj = es.search( index=index_kibana, body='{"size":10000}' )
 
 for objects in dump_obj['hits']['hits']:
 	obj_type = objects['_source']['type']
 	if obj_type in objectsToExport:
 		# Génération du nom de fichier
-		filename = objects['_source'][obj_type].get('title','NO_TITLE').replace('/', '_') + '.json'
+		filename = objects['_id'] + '.json'
 		exportFile = exportDir / obj_type / filename
 		# Création du dossier s'il n'existe pas
 		exportFile.parent.mkdir(parents=True, exist_ok=True)
