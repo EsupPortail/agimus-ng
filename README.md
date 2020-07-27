@@ -3,6 +3,9 @@
 
 ## Version 7.x
 
+| :warning: En cours d'élaboration, cette version n'est pas stable pour le moment |
+| --- |
+
 Cette version, en cours d'élaboration, est prévue pour être utilisée avec une version 7.x d'ELK (Elasticsearch, Logstash et Kibana.
 Utilisez la branche 2.x d'agimus si vous souhaitez utiliser la version 2 des briques ELK.
 
