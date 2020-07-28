@@ -1,4 +1,4 @@
-#!/home/agimus/scripts/python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 # es_templates_export.py
@@ -6,7 +6,7 @@
 
 # Permet d'exporter tous les templates elasticsearch dans le dossier passé en paramètre
 
-import sys, json
+import sys, json, config
 from pathlib import Path
 from elasticsearch import Elasticsearch
 
@@ -15,8 +15,7 @@ if len(sys.argv) != 2:
 	print (f'Usage : {sys.argv[0]} dossier_destination')
 	sys.exit(2)
 
-es = Elasticsearch( ['http://agimus1.univ.fr:9200/',
-						'http://agimus2.univ.fr:9200/'])
+es = Elasticsearch( config.cluster_ES )
 
 exportDir = Path(sys.argv[1])
 

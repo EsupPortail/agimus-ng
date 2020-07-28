@@ -29,7 +29,7 @@ exec 2> >(tee -a $ERROR_LOG >> $INFO_LOG) >>$INFO_LOG
 
 
 echo "$LINE_SEPARATOR"
-echo "#### Start of the process : "`date +'%F %R'` 
+echo "#### Start of the process : "`date +'%F %R'`
 echo "$LINE_SEPARATOR"
 echo ""
 
@@ -43,8 +43,11 @@ fi
 
 if [ "$DUMP_KIBANA_ES" = true ] ; then
 	echo "$LINE_SEPARATOR"
-	echo "#### Dump Elasticsearch templates and .kibana index"
-	$BUILD_HOME/scripts/dump_kibana_ES_conf.sh
+	echo "#### Dump Elasticsearch templates"
+	$BUILD_HOME/scripts/es_template_export.py $REP_LOGS/es_template_export
+  echo "$LINE_SEPARATOR"
+  echo "#### Dump .kibana index"
+	$BUILD_HOME/scripts/kibana_export.py $REP_LOGS/kibana_export
 	echo ""
 fi
 
@@ -65,7 +68,7 @@ echo "#### Import CAS trace : "`date +'%F %R'`
 if [ -f "$REP_LOGS/trace-cas.log.bz2" ]; then
 	echo "#### Number of lines in file "`bzcat $REP_LOGS/trace-cas.log.bz2 | wc -l`
 	bzcat $REP_LOGS/trace-cas.log.bz2 | $LOGSTASH_DIR/bin/logstash --quiet -f $BUILD_HOME/logstash/logstash-trace.conf >&2
-else 
+else
 	echo "ERR : NO file logs CAS-TRACE" >&2
 fi
 echo ""
@@ -85,7 +88,7 @@ echo "#### Import Moodle logs : "`date +'%F %R'`
 if [ -f "$REP_LOGS/moodle-access.log.gz" ]; then
 	echo "#### Number of lines in file "`zcat $REP_LOGS/moodle-access.log.gz | wc -l`
 	zcat $REP_LOGS/moodle-access.log.gz | $LOGSTASH_DIR/bin/logstash --quiet -f $BUILD_HOME/logstash/logstash-moodle.conf >&2
-else 
+else
         echo "ERR: NO file logs Moodle" >&2
 fi
 echo ""

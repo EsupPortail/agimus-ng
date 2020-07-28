@@ -1,40 +1,43 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 # vim: et sw=4 ts=4:
 # -*- coding: utf-8 -*-
 #
-# python scripts/ldap-agg.py
+# date && curl -XDELETE 'http://agimus.univ-lorraine.fr/elasticsearch/ldap/' && bin/logstash -f conf/logstash-ldap.conf && python conf/ldap-es.py && date
 
+import config
 from datetime import datetime
-from datetime import timedelta
 from elasticsearch import Elasticsearch
-import sys
 
-# Add date argument to give date parameter in case of add previous traetment
-date_object = datetime.now() - timedelta(days=1)
-try:
-    dateToRecord = sys.argv[1]
-    date_object = datetime.strptime('%s' % (dateToRecord), '%Y/%m/%d')
-except:
-    pass
+index_stats = 'ldap-stat'
 
-es = Elasticsearch()
+es = Elasticsearch(config.cluster_ES)
 
 bodysearch = {
-    "query": {
-        "match_all": {}
-    },
-    "aggs": {}
+  "size": 0,
+  "aggs": {
+    "stats": {
+      "composite": {
+        "sources": [
+        ]
+      }
+    }
+  }
 }
-ldapAttrs = [__VOS_ATTRIBUTS__]
 
-for attr in ldapAttrs:
-    bodysearch["aggs"][attr] = {"terms": {"field": attr, "size": 200}}
 
-res = es.search(index="ldap", body=bodysearch)
+for attr in config.ldapAttrs:
+    bodysearch["aggs"]["stats"]["composite"]["sources"].append({attr:{"terms":{"field":attr, "missing_bucket": "true"}}})
 
-for attr in ldapAttrs:
-    print date_object, attr
-    for f in res["aggregations"][attr]["buckets"]:
-        print " - ", f["key"], f["doc_count"]
-        es.index(index="ldap-stat", doc_type="ldap-stat", body={"attribut": attr,
-                 "value": f["key"], "count": f["doc_count"], "timestamp": date_object})
+def boucleAttr(body,after=""):
+    if after != "":
+        body["aggs"]["stats"]["composite"]["after"]=after
+    res = es.search(index="ldap", body=bodysearch)
+    for population in res["aggregations"]["stats"]["buckets"]:
+        entree = population["key"]
+        entree["total"] = population["doc_count"]
+        entree["@timestamp"] = datetime.now()
+        es.index(index=index_stats, body=entree)
+    if "after_key" in res["aggregations"]["stats"]:
+        boucleAttr(body,res["aggregations"]["stats"]["after_key"])
+
+boucleAttr(bodysearch)
