@@ -1,0 +1,9 @@
+filter {
+	if "no_output"  not in [tags] {
+		mutate {
+			# Supprimez ici les champs ajoutés automatiquement que vous ne souhaitez jamais conserver
+			remove_field => [ "host", "message" , "build" ]
+		}
+
+	}
+}

@@ -1,0 +1,21 @@
+filter {
+	if "no_output"  not in [tags] {
+		if [requestdate] {
+			mutate {
+				gsub => [ 
+					"requestdate", "CEST", "+0200",
+					"requestdate", "CET", "+0100"
+				]
+			}
+
+			date {
+				match => [ "requestdate", "EEE MMM dd HH:mm:ss Z yyyy", "MM-dd-yyyy HH:mm", "yyyy-MMM  d HH:mm:ss","yyyy-MMM d HH:mm:ss", "dd/MM/YYYY HH:mm:ss.SSS", "dd/MMM/yyyy:HH:mm:ss Z", "UNIX", "YYYY-MM-dd HH:mm:ss", "ISO8601", "yyyyMMdd HH:mm:ss", "yyyyMMdd'T'HHmmssZ", "yyyy-MMM +dd HH:mm:ss" ]
+				locale => "en"
+				timezone => "Europe/Paris"
+			}
+			mutate {
+				remove_field => [ "requestdate" ]
+			}
+		}
+	}
+}

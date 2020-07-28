@@ -1,0 +1,5 @@
+output {
+	if [erreur] {
+		stdout { codec => line { format => "ERREUR : %{erreur}" } }
+	}
+}

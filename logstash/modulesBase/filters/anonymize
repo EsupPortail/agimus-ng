@@ -1,0 +1,12 @@
+filter {
+	if "no_output"  not in [tags] {
+		if [ldap_uid] {
+			fingerprint {
+				method => "SHA1"
+				source => [ "ldap_uid" ]
+				key => "inserervotreclefici"
+				target => "ldap_uid"
+			}
+		}
+	}
+}

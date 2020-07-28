@@ -1,0 +1,49 @@
+filter {
+	if "no_output"  not in [tags] {
+		## Utilise l'adresse IP pour détecter le type de réseau utilisé (wifi établissement, filaire établissement, externe, ...)
+		#	# Détection des réseaux wifi WIFI
+		#	# Adaptez la liste de vos réseaux WIFI
+		#	cidr {
+		#		add_field => { "[network][type]" => "wifi" }
+		#		address => [ "%{clientip}" ]
+		#		network => [ "XXX.XXX.XXX.XXX/XX" ]
+		#	}
+		#
+		# if [network][type] == "wifi" {
+		#	  # Vous pouvez spécifier davantage de quel réseau il s'agit
+		#	  cidr {
+		#		  add_field => { "[network][name]" => "wifi-univ" }
+		#		  address => [ "%{clientip}" ]
+		#		  network => [ "XXX.XXX.XXX.XXX/XX" ]
+		#	  }
+		#
+		#	  cidr {
+		#		  add_field => { "[network][name]" => "wifi-eduroam" }
+		#		  address => [ "%{clientip}" ]
+		#		  network => [ "XXX.XXX.XXX.XXX/XX" ]
+		#	  }
+	  #
+		# } else {
+		#	# Detection des réseaux filaire
+		#		cidr {
+		#			add_field => { "[network][type]" => "wire" }
+		#			address => [ "%{clientip}" ]
+		#			network => [ "XXX.XXX.XXX.XXX/XX" , "XXX.XXX.XXX.XXX/XX" , "XXX.XXX.XXX.XXX/XX" ]
+		#		}
+		#	}
+		#
+		#	# sinon c'est de l'externe
+		#	if ![network][type] {
+		#		mutate {
+		#			add_field => { "[network][type]" => "external" }
+		#		}
+		#	}
+		#}
+		#
+		#	mutate {
+		#		# anonymisation IP
+		#		remove_field => [ "clientip" ]
+		#	}
+		#}
+	}
+}

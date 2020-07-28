@@ -1,0 +1,38 @@
+filter {
+	if "no_output"  not in [tags] {
+		if [ldap_uid] {
+			mutate {
+				lowercase => [ "ldap_uid" ]
+			}
+			elasticsearch {
+				hosts => [ "localhost" ]
+				index => "ldap"
+				query => "_id:%{ldap_uid}"
+				sort => ""
+				fields => {
+					'eduPersonPrimaryAffiliation' => 'eduPersonPrimaryAffiliation'
+					'supannEntiteAffectationPrincipale' => 'supannEntiteAffectationPrincipale'
+					'supannEtuCursusAnnee' => 'supannEtuCursusAnnee'
+					'supannEtuSecteurDisciplinaire' => 'supannEtuSecteurDisciplinaire'
+				}
+			}
+			# Suppression des valeurs vides
+			ruby {
+				code => "
+					hash = event.to_hash
+					hash.each do |k,v|
+						if v == nil
+							event.remove(k)
+						end
+					end
+				"
+			}
+			if "_elasticsearch_lookup_failure" in [tags] {
+				mutate {
+					add_tag => ["no_output"]
+					add_field => { "erreur" => "Impossible d'enrichir pour l'utilisateur %{ldap_uid}" }
+				}
+			}
+		}
+	}
+}

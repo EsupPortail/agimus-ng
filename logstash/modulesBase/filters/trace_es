@@ -1,0 +1,22 @@
+filter {
+	if "no_output"  not in [tags] {
+		elasticsearch {
+			hosts => [ "localhost" ]
+			index => "trace"
+			query => "_id:%{agimus}"
+			sort => ""
+			fields => {
+				'ldap_uid' => 'ldap_uid'
+			}
+		}
+		if "_elasticsearch_lookup_failure" in [tags] or ![ldap_uid] {
+			mutate {
+				add_tag => ["no_output"]
+				add_field => { "erreur" => "Impossible de trouver l'utilisateur associé à la trace %{agimus}" }
+			}
+		}
+		mutate {
+			remove_field => [ "agimus" ]
+		}
+	}
+}

@@ -1,0 +1,6 @@
+input {
+        stdin {
+        codec => plain { charset => "ISO-8859-1" }
+    }
+}
+

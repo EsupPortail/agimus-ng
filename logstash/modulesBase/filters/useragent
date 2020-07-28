@@ -1,0 +1,31 @@
+filter {
+	if "no_output"  not in [tags] {
+		if [agent] {
+			useragent {
+				source => "agent"
+			}
+			if [os_name] {
+				mutate {
+					remove_field => [ "is_mobile" ]
+				}
+				translate {
+					field => "os_name"
+					destination => "is_mobile"
+					dictionary_path => "../maps/map-osMobile.yml"
+					exact => true
+					fallback => "INCONNU"
+				}
+			}
+			if ![is_mobile] {
+				mutate {
+					add_field => { "is_mobile" => "unknown" }
+				}
+			}
+
+			mutate {
+				remove_field => [ "os_major", "major", "agent", "patch", "minor", "os_minor", "os" ]
+				rename => [ "name", "browser" ]
+			}
+		}
+	}
+}

@@ -1,0 +1,4 @@
+filter {
+	if "no_output"  not in [tags] {
+	}
+}

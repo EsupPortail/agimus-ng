@@ -1,0 +1,5 @@
+output {
+	if "no_output" not in [tags] {
+		stdout { codec => rubydebug }
+	}
+}

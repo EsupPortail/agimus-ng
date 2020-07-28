@@ -1,0 +1,9 @@
+output {
+	if "no_output" not in [tags] {
+		elasticsearch {
+			hosts => [ "localhost" ]
+			index => "%{[@metadata][index]}"
+		}
+
+	}
+}

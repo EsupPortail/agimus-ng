@@ -1,0 +1,10 @@
+output {
+	if "no_output" not in [tags] {
+		elasticsearch {
+			hosts => [ "localhost" ]
+			index => "%{[@metadata][index]}"
+			document_id => "%{[@metadata][document_id]}"
+		}
+
+	}
+}

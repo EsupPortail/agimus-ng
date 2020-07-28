@@ -1,0 +1,10 @@
+input {
+	LDAPSearch {
+        host => "ldap.univ.fr"
+        dn => "cn=agimus,ou=system,dc=univ,dc=fr"
+        password => "*****"
+        filter => "(uid=*)"
+        base => "ou=people,dc=univ,dc=fr"
+        attrs => ['uid', 'eduPersonPrimaryAffiliation', 'supannEntiteAffectationPrincipale', 'supannEtuCursusAnnee', 'supannEtuSecteurDisciplinaire' ]
+    }
+}
