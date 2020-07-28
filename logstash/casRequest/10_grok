@@ -1,0 +1,27 @@
+filter {
+        grok {
+                match => [ "message", "\[%{DATA:requestdate}\] \[IP:%{IPORHOST:clientip}\] \[ID:%{NOTSPACE:ldap_uid}\] \[TICKET:%{NOTSPACE}\] \[SERVICE:%{GREEDYDATA:cr_serv-request}\] \[USER-AGENT:%{DATA:[agent]}\]" ]
+        }
+        grok {
+                match => [ "cr_serv-request", "%{URIPROTO:cr_serv-proto}://(?:%{USER:cr_serv-user}(?::[^@]*)?@)?(?:%{URIHOST:cr_serv-host})?(?:%{URIPATH:cr_serv-uripath}(?:%{URIPARAM:cr_serv-uriparam})?)?" ]            
+        }
+
+        if "_grokparsefailure" in [tags]  {
+		mutate {
+			add_tag => [ "no_output" ]
+		}
+	}
+	if ![ldap_uid] or  [ldap_uid] =~ /^http.?:/ {
+		drop {}
+	}
+	mutate {
+		remove_field => [ "port" ]
+	}
+}
+output {
+	if "_grokparsefailure" in [tags] {
+		stdout {
+                        codec => line { format => "Erreur parsing : %{message}" }
+                }
+	}
+}
