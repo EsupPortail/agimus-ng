@@ -1,0 +1,8 @@
+filter {
+	if "no_output"  not in [tags] {
+	     mutate {
+                remove_field => [ "eventname", "edulevel", "contextlevel", "relateduserid", "anonymous", "other", "origin", "realuserid", "userid" ]
+            }
+
+	}
+}

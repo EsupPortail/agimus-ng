@@ -1,0 +1,71 @@
+filter {
+    mutate {
+        rename => { "id" => "mdl_id" }
+        rename => { "component" => "mdl_component" }
+        rename => { "action" => "mdl_action" }
+        rename => { "target" => "mdl_target" }
+        rename => { "objecttable" => "mdl_objecttable" }
+        rename => { "objectid" => "mdl_objectid" }
+        rename => { "crud" => "mdl_crud" }
+        rename => { "contextid" => "mdl_contextid" }
+        rename => { "contextinstanceid" => "mdl_contextinstanceid" }
+        rename => { "courseid" => "mdl_courseid" }
+        rename => { "timecreated" => "requestdate" }
+        rename => { "ip" => "clientip" }
+
+        convert => { "mdl_id" => "string" }
+    }
+
+    if [mdl_component] != "core" and [mdl_component] !~ "^tool_" {
+        translate {
+            field => "mdl_component"
+            destination => "mdl_activite"
+            dictionary_path => "${CONF_PATH:/tmp}/maps/moodle-activites.yml"
+            fallback => "INCONNU"
+            exact => true
+            regex => true
+        }
+    }
+
+    if [mdl_activite] == "INCONNU" {
+    	mutate {
+    		add_field => [ "erreur", "le mdl_component %{mdl_component} n'est pas listé dans le fichier /home/agimus/mappings_auto/moodle-activites.yml" ]
+    	}
+    }
+
+    if [userid] != 0 {
+        translate {
+            field => "userid"
+            destination => "ldap_uid"
+            dictionary_path => "${CONF_PATH:/tmp}/maps/map-moodle-users.yml"
+            exact => true
+            fallback => "INCONNU"
+        }
+
+        if [ldap_uid] == "INCONNU" {
+            drop {}
+        }
+
+    } else {
+    	drop {}
+    }
+
+    elasticsearch {
+    	hosts => [ "localhost" ]
+    	index => "ag-moodlecours-courant"
+    	query => "mdl_courseid:%{mdl_courseid}"
+    	sort => "@timestamp:desc"
+    	fields => {
+    	    'mdl_nom_cours'=>'mdl_nom_cours'
+    	    'mdl_actif'=>'mdl_actif'
+    	    'mdl_nom_cat'=>'mdl_nom_cat'
+    	    'mdl_nom_comp'=>'mdl_nom_comp'
+    	    'mdl_nom_coll'=>'mdl_nom_coll'
+    	}
+    }
+
+    mutate {
+    	add_field => [ "[@metadata][document_id]", "%{mdl_id}" ]
+    }
+
+}

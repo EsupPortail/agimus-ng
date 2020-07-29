@@ -4,6 +4,6 @@ input {
       jdbc_connection_string => "jdbc:mysql://moodledb.univ.fr:3306/moodle_prod"
       jdbc_user => "agimus"
       jdbc_password => "MDPspecifique"
-      statement => "SELECT `id` , `username` FROM `mdl_user` WHERE `deleted` = 0 AND `username` NOT LIKE '%.%'"
+      statement_filepath => "${CONF_PATH:'/tmp'}/moodle-from-db.sql"
     }
 }
