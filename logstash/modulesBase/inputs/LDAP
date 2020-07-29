@@ -5,6 +5,6 @@ input {
         password => "*****"
         filter => "(uid=*)"
         base => "ou=people,dc=univ,dc=fr"
-        attrs => ['uid', 'eduPersonPrimaryAffiliation', 'supannEntiteAffectationPrincipale', 'supannEtuCursusAnnee', 'supannEtuSecteurDisciplinaire' ]
+        attrs => ['uid', 'eduPersonPrimaryAffiliation', 'supannEntiteAffectationPrincipale', 'supannEtuInscription', 'supannEtuSecteurDisciplinaire' ]
     }
 }
