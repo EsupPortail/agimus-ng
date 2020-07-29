@@ -1,0 +1,21 @@
+filter {
+    mutate {
+        uppercase => [ "supanncodeentite" ]
+        remove_field => [ "host", "@timestamp"]
+    }
+    
+    translate {
+        field => "supannetucursusannee"
+        destination => "niveauCursus"
+        dictionary => [ "{SUPANN}L", "Licence",
+            "{SUPANN}M", "Master",
+            "{SUPANN}D", "Doctorat"
+            ]
+        exact => true
+        #fallback => "INCONNU"
+    }
+
+    if [supannetucursusannee] == "INCONNU" {
+        drop {}
+    }
+}

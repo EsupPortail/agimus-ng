@@ -1,0 +1,11 @@
+output { 
+  file {
+       path => "${CONF_PATH:/tmp}/maps/map-vdiReadable.yml"
+       #message_format => '"%{supanncodeentite}": "%{description}"'
+       codec => line { format => '"%{supanncodeentite}": "%{description}"' }
+  }
+#  stdout{
+#    codec => line { format => "Erreur parsing : %{supanncodeentite" }
+#   }
+}
+

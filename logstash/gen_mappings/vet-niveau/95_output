@@ -1,0 +1,9 @@
+output {
+  if [niveauCursus] {
+      file {
+           path => "${CONF_PATH:/tmp}/maps/map-vet-niveau.yml"
+           codec => line { format => '"%{supanncodeentite}": "%{niveauCursus}"' }
+      }
+  }
+}
+

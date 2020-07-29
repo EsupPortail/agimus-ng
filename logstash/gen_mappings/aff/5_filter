@@ -1,0 +1,21 @@
+filter {
+    mutate {
+                gsub => [
+                        "supanncodeentite", "\{LOC\}", ""
+                ]
+                gsub => [
+                        "supanncodeentite", "\{PART\}", ""
+                ]
+                gsub => [
+                        "supanncodeentiteparent", "\{LOC\}", ""
+                ]
+                gsub => [
+                        "supanncodeentiteparent", "\{PART\}", ""
+                ]
+                uppercase => [ "supanncodeentite" ]
+                uppercase => [ "supanncodeentiteparent" ]
+
+                remove_field => [ "host", "@timestamp"]
+    }
+}
+

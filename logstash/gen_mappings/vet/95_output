@@ -1,0 +1,8 @@
+output { 
+  file {
+       path => "${CONF_PATH:/tmp}/maps/map-vetReadable.yml"
+       #message_format => '"%{supannCodeEntite}": "%{description}"'
+       codec => line { format => '"%{supanncodeentite}": "%{description}"' }
+  }
+}
+

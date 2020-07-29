@@ -1,0 +1,12 @@
+output{
+#    stdout {
+#        codec => "rubydebug"
+#    }
+    file {
+        path => "${CONF_PATH:/tmp}/maps/map-moodle-categories.yml"
+        codec => line {
+                format => '"%{id}": "%{name}"'
+        }
+    }
+
+}

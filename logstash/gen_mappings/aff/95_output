@@ -1,0 +1,12 @@
+output {
+  file {
+	path => "${CONF_PATH:'/tmp'}/maps/map-supannEntiteAffectationReadable.yml"
+	codec => line { format => '"%{supanncodeentite}": "%{ou}"' }
+  }
+  if [supanncodeentiteparent] {
+	  file {
+		path => "${CONF_PATH:'/tmp'}/maps/map-supannEntiteAffectationParent.yml"
+		codec => line { format => '"%{supanncodeentite}": "%{supanncodeentiteparent}"' }
+	  }
+  }
+}

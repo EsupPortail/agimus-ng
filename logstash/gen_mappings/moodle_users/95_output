@@ -1,0 +1,6 @@
+output {
+  file {
+	path => "${CONF_PATH:/tmp}/maps/map-moodle-users.yml"
+	codec => line { format => '"%{id}": "%{username}"' }
+  }
+}

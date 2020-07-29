@@ -1,0 +1,12 @@
+filter {
+    mutate {
+        uppercase => [ "supanncodeentite" ]
+        remove_field => [ "host", "@timestamp"]
+    }
+        mutate {
+                gsub => [
+                        "description", '"', '\"'
+                ]
+        }
+}
+

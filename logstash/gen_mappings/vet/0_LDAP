@@ -1,0 +1,10 @@
+input {
+    LDAPSearch {
+      host => "ldap.univ.fr"
+      dn => "cn=agimus,ou=system,dc=univ,dc=fr"
+      password => "xxxxxxxxxxxx"
+      filter => "(&(objectclass=supannEntite)(supanntypeentite=vet))"
+      base => "ou=formations,dc=univ-lorraine,dc=fr"
+      attrs => ['supannCodeEntite', 'description' ]
+    }
+}

@@ -1,0 +1,10 @@
+input {
+    jdbc {
+      jdbc_driver_library => "${CONF_PATH:'/tmp'}/mysql-connector-java-5.1.37-bin.jar"
+      jdbc_driver_class => "com.mysql.jdbc.Driver"
+      jdbc_connection_string => "jdbc:mysql://moodledb.univ.fr:3306/moodle_prod"
+      jdbc_user => "agimus"
+      jdbc_password => "MDPspecifique"
+      statement => "SELECT `id` , `username` FROM `mdl_user` WHERE `deleted` = 0 AND `username` NOT LIKE '%.%'"
+    }
+}
