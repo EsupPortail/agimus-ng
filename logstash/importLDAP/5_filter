@@ -1,0 +1,156 @@
+filter {
+    mutate {
+    	rename => [
+    		'uid' , '[@metadata][document_id]'
+    		]
+    }
+
+    mutate {
+        gsub => [
+            # Delete préfixe LOC
+            'supannentiteaffectationprincipale', "\{LOC\}", ""
+        ]
+		gsub => [
+            # Delete préfixe PART
+            'supannentiteaffectationprincipale', "\{PART\}", ""
+        ]
+		join => ['supannentiteaffectation', '|']
+		gsub => [
+            # Delete préfixe LOC
+            'supannentiteaffectation', "\{LOC\}", ""
+        ]
+		gsub => [
+            # Delete préfixe PART
+            'supannentiteaffectation', "\{PART\}", ""
+        ]
+    }
+    # Doit etre dans son propre mutate
+    mutate {
+        split => ['supannentiteaffectation', '|']
+    }
+
+    # Traduction edupersonprimaryaffiliation dans un format lisible
+    # utilise le fichier mapping : maps/eduPersonPrimaryAffiliation.yaml
+    # exemple du fichier eduPersonPrimaryAffiliation.yaml, une ligne par mapping
+    #     "student": "étudiant"
+
+    if [edupersonprimaryaffiliation] {
+    	translate {
+    		field => "edupersonprimaryaffiliation"
+    		destination => "edupersonprimaryaffiliation-hr"
+    		dictionary_path => "maps/eduPersonPrimaryAffiliation.yaml"
+    		exact => true
+    		fallback => "INCONNU"
+    	}
+    }
+
+
+    # calcul de l'affectation principale
+    # si supannentiteaffectationprincipale on prend
+    if [supannentiteaffectationprincipale] {
+        mutate {
+            add_field => { "aff-princ" => "%{[supannentiteaffectationprincipale]}" }
+        }
+
+        translate {
+            field => "[aff-princ]"
+            destination => "[aff-princ-hr]"
+            dictionary_path => "${CONF_PATH:/tmp}/maps/map-supannEntiteAffectationReadable.yml"
+            exact => false
+            fallback => "INCONNU"
+        }
+    }
+
+    # Format booléen pour udlensursis
+	translate {
+		field => "udlensursis"
+		destination => "udlensursis"
+		dictionary => {
+				"O" => true
+				"N" => false
+				}
+		exact => true
+		override => true
+		fallback => false
+	}
+
+    # Génération du booléen estInscrit
+	if [supannetuinscription] {
+		mutate {
+			join => ['supannetuinscription', ';']
+		}
+		translate {
+			field => "supannetuinscription"
+			destination => "estinscrit"
+			dictionary => [ ".*insc=cur.*" , true ]
+			exact => true
+			regex => true
+			fallback => false
+		}
+
+
+		############################################################################
+		# Découpage du supannetuinscription
+    #   A adapter en fonction des informations disponibles
+		#[anneeinsc=2015][insc=cur][curann={SUPANN}M2][diplome={LOC}{VDI}5IGC-511][affect={LOC}FDG--][apoaffect={LOC}{APOGEE}DG0][etape={LOC}{VET}7KTNZZ-300]
+		############################################################################
+    if [estinscrit] {
+		  grok {
+       	  break_on_match => false
+    	    match => [ "supannetuinscription", "%{DATA}\[anneeinsc=(?<insc-annee>[0-9]*)\]\[insc=cur\]\[curann=%{DATA:[insc-curann]}\]\[diplome=%{DATA:[insc-diplome]}\]\[%{DATA}\]\[%{DATA}\]\[etape=%{DATA:[insc-etape]}\]%{DATA}" ]
+    	    tag_on_failure => ["_grokinscriptionparsefailure"]
+    	}
+    }
+		if [insc-diplome] {
+			translate {
+				field => "[insc-diplome]"
+				destination => "[insc-diplome-hr]"
+				dictionary_path => "${CONF_PATH:/tmp}/maps/map-vdiReadable.yml"
+				exact => false
+				fallback => "INCONNU"
+			}
+		}
+		if [insc-etape] {
+			translate {
+				field => "[insc-etape]"
+				destination => "[insc-etape-hr]"
+				dictionary_path => "${CONF_PATH:/tmp}/maps/map-vetReadable.yml"
+				exact => false
+				fallback => "INCONNU"
+			}
+		}
+		if [insc-etape] {
+		    translate {
+			field => "[insc-etape]"
+			destination => "[insc-etape-niveau]"
+			dictionary_path => "${CONF_PATH:/tmp}/maps/map-vet-niveau.yml"
+			exact => false
+			fallback => "INCONNU"
+		    }
+		}
+
+		mutate {
+			remove_field => [ "supannetuinscription" , "supannentiteaffectationprincipale" ]
+		        gsub => [
+			    # Delete préfixe SUPANN
+			    '[insc-curann]', "\{SUPANN\}", ""
+		        ]
+
+		}
+	} else {
+    mutate {
+      add_field => { "estinscrit" => false }
+  	}
+  }
+	mutate {
+    remove_field => [ "supannentiteaffectationprincipale" ]
+	}
+
+  mutate {
+		remove_field => [ "[host]" ]
+    convert => {
+      "udlensursis" => "boolean"
+      "estinscrit" => "boolean"
+    }
+  }
+}
