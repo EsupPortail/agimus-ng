@@ -14,10 +14,10 @@ REP_LOGS=$LOG_DIR/$DATE
 ERROR_LOG=$REP_LOGS/error.agimus.log
 INFO_LOG=$REP_LOGS/info.agimus.log
 STAT_LDAP_LOG=$REP_LOGS/stats-ldap.log
-BUILD_HOME="/opt/agimus-ng/build"
+BUILD_HOME="/opt/agimus-ng/"
 LOGSTASH_DIR="/opt/logstash"
 # La variable d'environnement CONF_PATH est utilisée dans les configurations logstash
-export CONF_PATH=$LOGSTASH_DIR
+export CONF_PATH=$BUILD_HOME"/logstash/"
 
 DELETE_OLD_LOG=true
 DUMP_KIBANA_ES=false
