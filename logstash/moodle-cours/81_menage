@@ -1,0 +1,8 @@
+filter {
+	if "no_output"  not in [tags] {
+		mutate {
+			remove_field => [ "mdl_enseignants" ]
+		}
+
+	}
+}

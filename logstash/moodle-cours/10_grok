@@ -1,0 +1,90 @@
+filter {
+				dissect {
+					mapping => {
+						"message" => "[cours:%{mdl_courseid}];[nom_cours:%{mdl_nom_cours}];[cat:%{mdl_id_cat}];[enseignants:%{mdl_enseignants}];[activites:%{mdl_activites}];[type_activites:%{mdl_type_activites}];[actif:%{mdl_actif}];[niv2:%{mdl_id_niv2}];[niv1:%{mdl_id_niv1}];[time:%{requestdate}]"
+					}
+				}
+        if "_dissectfailure" not in [tags] {
+            mutate {
+								convert => {
+									"mdl_actif" => "boolean"
+								}
+                split => { "mdl_enseignants" => "|" }
+            }
+						ruby {
+							code => "
+								event.set('mdl_nb_enseignants', event.get('mdl_enseignants').length)
+							"
+						}
+
+						if [mdl_activites] {
+	            mutate {
+	                gsub => [
+	                    "mdl_activites", "=", ', "nom_activite":"',
+	                    "mdl_activites", "\|", '"}, {"id_activite":',
+	                    "mdl_activites", "^", '[ {"id_activite":',
+	                    "mdl_activites", "$", '"} ]'
+	                ]
+	            }
+
+						}
+            json {
+                source => "mdl_activites"
+                target => "mdl_activites"
+            }
+
+						if [mdl_type_activites] {
+	            kv {
+	                source => "mdl_type_activites"
+	                target => "mdl_type_activites"
+	                field_split => "|"
+	                value_split => "="
+	            }
+						} else {
+							# s'il est vide, on le transforme en json vide
+	            json {
+	                source => "mdl_type_activites"
+	                target => "mdl_type_activites"
+	            }
+						}
+
+           translate {
+                field => "mdl_id_cat"
+                destination => "mdl_nom_cat"
+                dictionary_path => "${CONF_PATH:/tmp}/maps/moodle-categories.yml"
+                exact => true
+                fallback => "INCONNU"
+            }
+
+           translate {
+                field => "mdl_id_niv2"
+                destination => "mdl_nom_niv2"
+                dictionary_path => "${CONF_PATH:/tmp}/maps/moodle-categories.yml"
+                exact => true
+                fallback => "INCONNU"
+            }
+
+           translate {
+                field => "mdl_id_niv1"
+                destination => "mdl_nom_niv1"
+                dictionary_path => "${CONF_PATH:/tmp}/maps/moodle-categories.yml"
+                exact => true
+                fallback => "INCONNU"
+            }
+
+	}
+		if "_dissectfailure" in [tags] {
+    #if "_grokparsefailure" in [tags]  {
+		mutate {
+			add_tag => [ "no_output" ]
+			add_field => { "erreur" => "format incorrect : %{message}" }
+		}
+	}
+}
+output {
+	if "_grokparsefailure" in [tags] {
+		stdout {
+                        codec => line { format => "Erreur parsing : %{message}" }
+                }
+	}
+}

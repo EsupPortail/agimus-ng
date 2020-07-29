@@ -1,0 +1,6 @@
+filter {
+	mutate {
+		add_field => { "[@metadata][document_id]" => "%{mdl_courseid}-%{+YYYY.MM.dd}" 
+		 							"[@metadata][index]" => "ag-moodlecours-%{+YYYY.MM}" }
+	}
+}
