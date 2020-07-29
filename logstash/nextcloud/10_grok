@@ -1,0 +1,21 @@
+filter {
+
+        grok {
+                # toto54;Jean Toto;170321135;10737418240;170
+                match => [ "message", "%{NOTSPACE:ldap_uid};%{GREEDYDATA};%{INT:nc_quotaused};%{INT:nc_quotafix};%{INT:nc_nbfiles}(;\[time:%{NUMBER:requestdate}\])?" ]
+        }
+
+
+        if "_grokparsefailure" in [tags]  {
+		mutate {
+			add_tag => [ "no_output" ]
+		}
+	}
+}
+output {
+	if "_grokparsefailure" in [tags] {
+		stdout {
+                        codec => line { format => "Erreur parsing : %{message}" }
+                }
+	}
+}
