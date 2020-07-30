@@ -1,0 +1,21 @@
+filter {
+       grok {
+                match => [ "message", "%{DATA:clientip} - - \[%{HTTPDATE:requestdate}\].*/doc/%{DATA:oo_doc}/c/.* %{DATA:agimus}$" ]
+        }
+
+        if "_grokparsefailure" in [tags]  {
+		mutate {
+			add_tag => [ "no_output" ]
+		}
+	}
+	if  ![agimus] or [agimus] !~ /^TRACE-/ {
+		drop {}
+	}
+}
+output {
+	if "_grokparsefailure" in [tags] {
+		stdout {
+                        codec => line { format => "Erreur parsing : %{message}" }
+                }
+	}
+}
