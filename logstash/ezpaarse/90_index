@@ -1,0 +1,6 @@
+filter {
+	mutate {
+		add_field => { "[@metadata][index]" => "ag-ezagimus-%{+YYYY.MM}" }
+		rename => { "ez_log_id" => "[@metadata][document_id]" }
+	}
+}

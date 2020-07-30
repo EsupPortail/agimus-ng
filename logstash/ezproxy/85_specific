@@ -1,0 +1,22 @@
+filter {
+	if "no_output"  not in [tags] {
+            # On remplace les valeurs vides par un tiret
+            ruby {
+                code => "event.set('[network][name]', '-') if event.get('[network]')['name']==nil;
+                event.set('edupersonprimaryaffiliation-hr', '-') if event.get('edupersonprimaryaffiliation-hr')==nil;
+                event.set('edupersonprimaryaffiliation', '-') if event.get('edupersonprimaryaffiliation')==nil;
+                event.set('aff-princ-hr', '-') if event.get('aff-princ-hr')==nil;
+                event.set('insc-curann', '-') if event.get('insc-curann')==nil;
+                event.set('insc-diplome-hr', '-') if event.get('insc-diplome-hr')==nil;
+                event.set('insc-etape-hr', '-') if event.get('insc-etape-hr')==nil;
+                event.set('insc-etape-niveau', '-') if event.get('insc-etape-niveau')==nil;
+                event.set('estinscrit', '-') if event.get('estinscrit')==nil;"
+            }
+
+			if ! [ldap_uid] {
+				mutate {
+					add_field => { "ldap_uid" => "-" }
+				}
+			}
+	}
+}

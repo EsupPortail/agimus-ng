@@ -1,0 +1,37 @@
+filter {
+  csv {
+		separator => ";"
+		quote_char => '"'
+		skip_empty_columns => true
+		columns => [
+			"requestdate","date","ldap_uid","ez_platform","ez_platform_name","ez_publisher_name","ez_rtype","ez_mime","ez_print_identifier","ez_online_identifier","ez_title_id","ez_doi","ez_publication_title","ez_publication_date","ez_unitid","ez_domain","ez_on_campus","ez_log_id","ezpaarse_version","ezpaarse_date","middlewares_version","middlewares_date","platforms_version","platforms_date","middlewares","ez_title","ez_type","ez_subject","geoip-country","geoip-latitude","geoip-longitude","ez_url","[network][type]","[network][name]", "edupersonprimaryaffiliation-hr", "edupersonprimaryaffiliation","aff-princ-hr","insc-curann","insc-diplome-hr","insc-etape-hr","insc-etape-niveau", "estinscrit"
+		    ]
+		convert => {
+		    "estinscrit" => "boolean"
+		}
+    autogenerate_column_names => false
+
+  }
+	mutate {
+		lowercase => ["ez_on_campus"]
+		convert => {
+                    "ez_on_campus" => "boolean"
+                }
+	}
+
+  if "_csvparsefailure" in [tags]  {
+		mutate {
+			add_tag => [ "no_output" ]
+		}
+	}
+	if [ldap_uid] == "login" {
+		drop {}
+	}
+}
+output {
+	if "_csvparsefailure" in [tags] {
+		stdout {
+                        codec => line { format => "Mauvais format csv pour la ligne : %{message}" }
+                }
+	}
+}

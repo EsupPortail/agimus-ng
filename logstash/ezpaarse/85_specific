@@ -1,0 +1,8 @@
+filter {
+	if "no_output"  not in [tags] {
+	        mutate {
+	                remove_field => [ "date" , "geoip-latitude" , "geoip-longitude" , "geoip-country" , "ezhost", "ezproxy-session" , "ezproxy-groups", "middlewares_version", "middlewares_date", "ezpaarse_version", "ezpaarse_date", "platforms_version", "platforms_date", "middlewares" ]
+        	}
+
+	}
+}

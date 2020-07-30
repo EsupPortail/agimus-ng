@@ -1,0 +1,29 @@
+filter {
+       grok {
+                match => [ "message", "%{IP:clientip} %{NOTSPACE:session} %{USER:ldap_uid} (?<ladate>\[%{MONTHDAY:jour}/%{MONTH:mois}/%{YEAR:annee}:%{TIME} %{INT}*\]) \"%{GREEDYDATA:requete}\" %{NUMBER:status} (?:%{NUMBER:size}|-) %{GREEDYDATA:ezproxygroupes}" ]
+        }
+
+        if "_grokparsefailure" in [tags]  {
+		mutate {
+			add_tag => [ "no_output" ]
+		}
+	}
+	if [ldap_uid] == "-" {
+    mutate {
+      add_field => { "clientip-conservee" => "%{clientip}" }
+      remove_field => [ "ldap_uid" ]
+    }
+	} else {
+		mutate {
+			lowercase => [ "ldap_uid" ]
+			add_field => { "clientip-conservee" => "%{clientip}" }
+		}
+	}
+}
+output {
+	if "_grokparsefailure" in [tags] {
+		stdout {
+                        codec => line { format => "Erreur parsing : %{message}" }
+                }
+	}
+}

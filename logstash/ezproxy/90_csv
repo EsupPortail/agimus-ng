@@ -1,0 +1,10 @@
+output {
+#	if "no_output"  not in [tags] {
+		csv {
+                fields => [ 'clientip-conservee', 'session', 'ldap_uid', 'ladate', 'requete', 'status', 'size', 'ezproxygroupes', '[network][type]', '[network][name]', 'edupersonprimaryaffiliation-hr', 'edupersonprimaryaffiliation','aff-princ-hr','insc-curann','insc-diplome-hr','insc-etape-hr','insc-etape-niveau', 'estinscrit' ]
+                path => '/tmp/traitement_ezproxy'
+                csv_options => { "col_sep" => " " "force_quotes" => true }
+            }
+
+#	}
+}
