@@ -1,0 +1,21 @@
+filter {
+  grok {
+      match => [ "message", "%{IPORHOST:clientip} %{USER:ident} %{USER:auth} \[%{HTTPDATE:requestdate}\] \"%{WORD:method} %{DATA:request} HTTP/%{NUMBER:httpversion}\" %{NUMBER:response} (?:%{NUMBER:bytes}|-) \"%{DATA:referrer}\" \"%{DATA:agent}\" (?<agimus>[0-9A-Za-z-]*)" ]
+  }
+
+  if "_grokparsefailure" in [tags]  {
+		mutate {
+			add_tag => [ "no_output" ]
+		}
+	}
+	if  ![agimus] or [agimus] !~ /^TRACE-/ {
+		drop {}
+	}
+}
+output {
+	if "_grokparsefailure" in [tags] {
+		stdout {
+        codec => line { format => "Erreur parsing : %{message}" }
+    }
+	}
+}
