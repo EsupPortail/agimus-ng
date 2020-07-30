@@ -1,0 +1,8 @@
+filter {
+	if "no_output"  not in [tags] {
+		mutate {
+			lowercase => ["idp_serviceprovider"]
+			split => ['idp_attr_sent', ',']
+		}
+	}
+}

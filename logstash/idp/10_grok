@@ -1,0 +1,21 @@
+filter {
+       grok {
+                match => [ "message", "(?<requestdate>[0-9]{8}T[0-9]{6}Z)\|([^\|]*?)\|([^\|]*?)\|((http|https)://)?(?<idp_serviceprovider>[^\|]*?)\|([^\|]*?)\|([^\|]*?)\|([^\|]*?)\|([^\|]*?)\|(?<ldap_uid>[^\|]*?)\|([^\|]*?)\|(?<idp_attr_sent>[^\|]*?)\|([^\|]*?)\|([^\|]*?)\|" ]
+        }
+
+        if "_grokparsefailure" in [tags]  {
+		mutate {
+			add_tag => [ "no_output" ]
+		}
+	}
+	if ![ldap_uid] {
+		drop {}
+	}
+}
+output {
+	if "_grokparsefailure" in [tags] {
+		stdout {
+                        codec => line { format => "Erreur parsing : %{message}" }
+                }
+	}
+}
