@@ -1,0 +1,20 @@
+filter {
+	if "no_output"  not in [tags] {
+		# Si on a detecté une ligne rejettée par RBL on place les paramètres suivants pour être conforme aux lignes avec tag
+		if [rbl] {
+			mutate {
+				add_field => {
+					"as_mailaction" => "reject"
+					"as_mailstatus" => "rbl"
+					"as_mailtag" => "RBL"
+				}
+				remove_field => [rbl]
+			}
+		}
+
+		mutate {
+			lowercase => ["tag"]
+		}
+
+	}
+}

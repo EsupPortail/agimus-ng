@@ -1,0 +1,18 @@
+#
+# Utiliser ce fichier avec les fichier de logs fourni par le service antispam Renater
+# Attention, par défaut, les logs ne contiennent pas l'année. Il faut l'ajouter dans le script de traitement. On se base sur l'année du jour précédent car on traite les logs de la veille
+# Ligne d'exemple :
+#  2017-Sep 10 00:00:01 194.214.201.9 mxb1-2/smtpd[65464]: NOQUEUE: milter-reject: RCPT from unknown[113.160.248.67]: 554 5.7.1 Service unavailable; Client host 113.160.248.67 blocked using zen.dnsbl; from=<oddandirish@eircom.net> to=<john.doe@univ.fr> proto=ESMTP helo=<static.vnpt.vn>
+# bzcat ASrenater.log.bz2 | sed "s/.*/`date --date="$DATE -1day" +%Y`-&/" | /home/agimus/bin/logstash -f /home/agimus/ETL/renaterantispam/
+#
+filter {
+       grok {
+                match => { "message" => ["(?<requestdate>%{YEAR}\-%{MONTH} +%{MONTHDAY} %{HOUR}:%{MINUTE}:%{SECOND}).*domain\=%{HOSTNAME:as_maildomain},.*action\=%{WORD:as_mailaction},.*status\=%{WORD:as_mailstatus},.*tag\=\[?%{DATA:as_mailtag}\]?,.*" , "(?<requestdate>%{YEAR}\-%{MONTH} +%{MONTHDAY} %{HOUR}:%{MINUTE}:%{SECOND}).*domain\=%{HOSTNAME:as_maildomain},.*(?<rbl>rbl:zen.dnsbl).*"] }
+        }
+
+        if "_grokparsefailure" in [tags]  {
+		mutate {
+			add_tag => [ "no_output" ]
+		}
+	}
+}
