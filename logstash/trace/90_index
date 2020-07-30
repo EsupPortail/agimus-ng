@@ -1,0 +1,8 @@
+filter {
+	mutate {
+		rename => [
+			'cookie_id' , '[@metadata][document_id]'
+		]
+		add_field => { "[@metadata][index]" => "trace" }
+	}
+}

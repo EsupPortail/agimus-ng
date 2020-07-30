@@ -1,0 +1,24 @@
+filter {
+    dissect {
+      mapping => {
+        "message" => "%{?serveur} %{cookie_id}:%{ldap_uid}"
+      }
+    }
+    if "_dissectparsefailure" in [tags] {
+      mutate {
+  			add_tag => [ "no_output" ]
+  		}
+    }
+    mutate {
+      strip => ["cookie_id", "ldap_uid"]
+      lowercase => ["ldap_uid"]
+    }
+
+}
+output {
+	if "_grokparsefailure" in [tags] {
+		stdout {
+                        codec => line { format => "Erreur parsing : %{message}" }
+                }
+	}
+}
