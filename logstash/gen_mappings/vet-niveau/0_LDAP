@@ -4,7 +4,7 @@ input {
       dn => "cn=agimus,ou=system,dc=univ,dc=fr"
       password => "xxxxxxxxxxxx"
       filter => "(&(objectclass=supannEntite)(supanntypeentite=vet))"
-      base => "ou=formations,dc=univ-lorraine,dc=fr"
+      base => "ou=formations,dc=univ,dc=fr"
       attrs => ['supannCodeEntite', 'supannEtuCursusAnnee' ]
     }
 }

@@ -38,7 +38,7 @@ filter {
     	translate {
     		field => "edupersonprimaryaffiliation"
     		destination => "edupersonprimaryaffiliation-hr"
-    		dictionary_path => "maps/eduPersonPrimaryAffiliation.yaml"
+    		dictionary_path => "${CONF_PATH:/tmp}maps/eduPersonPrimaryAffiliation.yaml"
     		exact => true
     		fallback => "INCONNU"
     	}
