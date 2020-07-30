@@ -1,0 +1,12 @@
+filter {
+	kv {
+		field_split => ";"
+	}
+}
+output {
+	if "_kv_filter_error" in [tags] {
+		stdout {
+                        codec => line { format => "Erreur parsing : %{message}" }
+                }
+	}
+}

@@ -1,0 +1,8 @@
+filter {
+	mutate {
+		add_field => { 
+			"[@metadata][index]" => "ag-rocketchat-%{+YYYY.MM}" 
+			"[@metadata][document_id]" => "%{@timestamp}" 
+		}
+	}
+}
