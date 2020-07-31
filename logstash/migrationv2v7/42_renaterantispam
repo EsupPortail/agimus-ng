@@ -1,0 +1,15 @@
+filter {
+
+  if [@metadata][_type] == 'renaterantispam' {
+   mutate {
+    rename => {
+      'mailaction' => 'as_mailaction'
+      'mailstatus' => 'as_mailstatus'
+      'mailtag' => 'as_mailtag'
+      'maildomain' => 'as_maildomain'
+    }
+    remove_field => [ "datetime" , 'tag' ]
+   }
+  }
+
+}

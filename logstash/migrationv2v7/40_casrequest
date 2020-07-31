@@ -1,0 +1,16 @@
+filter {
+
+  if [@metadata][_type] == 'casrequest' {
+   mutate {
+    rename => {
+      '[service][host]' => 'cr_serv-host'
+      '[service][proto]' => 'cr_serv-proto'
+      '[service][request]' => 'cr_serv-request'
+      '[service][uriparam]' => 'cr_serv-uriparam'
+      '[service][uripath]' => 'cr_serv-uripath'
+    }
+    remove_field => [ "os", "port", "tags", "service" ]
+   }
+  }
+
+}

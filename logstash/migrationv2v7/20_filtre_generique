@@ -1,0 +1,63 @@
+filter {
+  # On renomme les champs qui doivent l'être et on passe tous les champs en minuscules
+  mutate {
+    rename => {
+      'uid' => 'ldap_uid'
+      'eduPersonPrimaryAffiliation' => 'edupersonprimaryaffiliation'
+      'supannEntiteAffectationPrincipale' => 'supannentiteaffectationprincipale'
+    }
+  }
+
+  if [booleenQuelconque]{
+    mutate {
+      add_field => {
+        'booleenquelconque' => "%{booleenQuelconque}"
+      }
+    }
+  } else {
+    mutate {
+      add_field => {
+        'booleenquelconque' => false
+      }
+    }
+  }
+  if [estInscrit] {
+    mutate {
+      add_field => {
+        'estinscrit' => "%{estInscrit}"
+      }
+    }
+  }
+
+  # Après avoir ajouter les nouveaux champs on supprime les anciens
+  mutate {
+    remove_field => [
+      'estInscrit',
+      'booleenQuelconque'
+			]
+  }
+
+  # Permet ensuite la conversion en booléen
+  mutate {
+    gsub => [
+      "booleenquelconque" , "O" , "y",
+      "booleenquelconque" , "N" , "n"
+    ]
+  }
+
+  if ![estinscrit] {
+    mutate {
+      add_field => { "estinscrit" => false }
+    }
+  }
+
+  # On termine par une conversion
+  mutate {
+    convert => {
+      "booleenquelconque" => "boolean"
+      "estinscrit" => "boolean"
+    }
+  }
+
+
+}

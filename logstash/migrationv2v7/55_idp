@@ -1,0 +1,14 @@
+filter {
+
+  if [@metadata][_type] == 'idprequest' {
+   mutate {
+    rename => {
+      'serviceProvider' => 'idp_serviceprovider'
+      'attr_sent' => 'idp_attr_sent'
+    }
+    remove_field => [ "timestamp" ]
+    replace => { "[@metadata][_type]" => "idp" }
+   }
+  }
+
+}

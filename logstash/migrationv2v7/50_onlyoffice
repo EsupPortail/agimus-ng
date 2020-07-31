@@ -1,0 +1,10 @@
+filter {
+  if [@metadata][_type] == 'onlyoffice' {
+     mutate {
+      rename => {
+        'doc' => 'oo_doc'
+      }
+    }
+  }
+
+}

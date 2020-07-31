@@ -1,0 +1,13 @@
+filter {
+
+  if [@metadata][_type] == 'moodledblog' {
+   mutate {
+    convert => { "mdl_actif" => "boolean" }
+    replace => { "[@metadata][_type]" => "moodledb"  }
+   }
+   mutate {
+     remove_field => [ "ip" ]
+   }
+  }
+
+}

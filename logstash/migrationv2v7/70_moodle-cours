@@ -1,0 +1,27 @@
+filter {
+
+  if [@metadata][_type] == 'coursmoodle' {
+   mutate {
+    convert => { "mdl_actif" => "boolean" }
+    replace => { "[@metadata][_type]" => "moodlecours"
+                 "[@metadata][_id]" => "%{mdl_courseid}-%{+YYYY.MM.dd}"  }
+   }
+   if [mdl_enseignants] {
+     ruby {
+       code => "
+       event.set('mdl_nb_enseignants', event.get('mdl_enseignants').length)
+       "
+     }
+     mutate {
+       remove_field => [ "mdl_enseignants" ]
+     }
+   } else {
+     mutate {
+       add_field => { "nb_enseignants" => 0 }
+     }  
+   }
+  }
+
+
+
+}

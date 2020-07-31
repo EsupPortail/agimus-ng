@@ -1,0 +1,8 @@
+filter {
+  mutate {
+    add_field => {
+      "[@metadata][index]" => "ag-%{[@metadata][_type]}-%{+YYYY.MM}"
+      "[@metadata][document_id]" => "%{[@metadata][_id]}"
+    }
+  }
+}
