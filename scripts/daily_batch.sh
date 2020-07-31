@@ -1,5 +1,14 @@
 #! /bin/bash
 
+###########
+#
+# Script permettant l'import des logs. A exécuter régulièrement, il permet d'effectuer le traitement quelque soit l'heure à laquelle arrive le log
+#   Il est conseillé d'exécuter juste avant le script de vérification d'existence du plugin LDAPSearch
+#   Exemple de configuration cron :
+#     0 3-12 * * * /home/agimus/scripts/check_plugin_ldap.sh > /dev/null 2>&1 && /home/agimus/scripts/daily_batch.sh  > /dev/null 2>&1
+#
+##############################
+
 if [ -z "$1" ]
 then
     DATE=`date -d yesterday +"%Y/%m/%d"`
