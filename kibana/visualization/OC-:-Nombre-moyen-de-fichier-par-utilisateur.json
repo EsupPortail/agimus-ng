@@ -1,5 +1,0 @@
-{
-        "visState" : "{\n  \"type\": \"metric\",\n  \"params\": {\n    \"fontSize\": 60,\n    \"spyPerPage\": 10\n  },\n  \"aggs\": [\n    {\n      \"id\": \"1\",\n      \"type\": \"avg\",\n      \"schema\": \"metric\",\n      \"params\": {\n        \"field\": \"nbfiles\",\n        \"json\": \"\"\n      }\n    }\n  ],\n  \"listeners\": {}\n}",
-        "kibanaSavedObjectMeta" : {
-          "searchSourceJSON" : "{\n  \"index\": \"logstash-*\",\n  \"query\": {\n    \"query_string\": {\n      \"query\": \"_type:bulstats AND @timestamp:[now-1d TO now]\",\n      \"analyze_wildcard\": true\n    }\n  },\n  \"filter\": []\n}"
-        }

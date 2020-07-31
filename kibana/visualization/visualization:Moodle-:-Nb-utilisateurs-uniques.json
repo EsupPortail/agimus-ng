@@ -1,0 +1,24 @@
+{
+  "visualization": {
+    "description": "",
+    "kibanaSavedObjectMeta": {
+      "searchSourceJSON": "{\n  \"query\": {\n    \"query\": {\n      \"query_string\": {\n        \"query\": \"_index:ag-moodledb-*\",\n        \"analyze_wildcard\": true\n      }\n    },\n    \"language\": \"lucene\"\n  },\n  \"filter\": [],\n  \"indexRefName\": \"kibanaSavedObjectMeta.searchSourceJSON.index\"\n}"
+    },
+    "title": "Moodle : Nb utilisateurs uniques",
+    "uiStateJSON": "{}",
+    "version": 1,
+    "visState": "{\n  \"title\": \"Moodle : Nb utilisateurs uniques\",\n  \"type\": \"metric\",\n  \"params\": {\n    \"metric\": {\n      \"colorsRange\": [\n        {\n          \"from\": 0,\n          \"to\": 10000\n        }\n      ],\n      \"labels\": {\n        \"show\": true\n      },\n      \"colorSchema\": \"Green to Red\",\n      \"style\": {\n        \"fontSize\": \"40\"\n      }\n    },\n    \"handleNoResults\": true\n  },\n  \"aggs\": [\n    {\n      \"id\": \"1\",\n      \"type\": \"cardinality\",\n      \"schema\": \"metric\",\n      \"params\": {\n        \"field\": \"ldap_uid\",\n        \"customLabel\": \"Utilisateurs uniques\"\n      }\n    }\n  ],\n  \"listeners\": {}\n}"
+  },
+  "type": "visualization",
+  "references": [
+    {
+      "id": "f88a1d60-1fee-11ea-9437-75ed488effa6",
+      "name": "kibanaSavedObjectMeta.searchSourceJSON.index",
+      "type": "index-pattern"
+    }
+  ],
+  "migrationVersion": {
+    "visualization": "7.7.0"
+  },
+  "updated_at": "2020-02-07T10:31:05.083Z"
+}

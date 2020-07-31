@@ -1,5 +1,0 @@
-{
-        "visState" : "{\n  \"type\": \"metric\",\n  \"params\": {\n    \"fontSize\": \"50\"\n  },\n  \"aggs\": [\n    {\n      \"id\": \"1\",\n      \"type\": \"cardinality\",\n      \"schema\": \"metric\",\n      \"params\": {\n        \"field\": \"uid\"\n      }\n    }\n  ],\n  \"listeners\": {}\n}",
-        "kibanaSavedObjectMeta" : {
-          "searchSourceJSON" : "{\n  \"index\": \"logstash-*\",\n  \"query\": {\n    \"query_string\": {\n      \"query\": \"_type:bulstats\",\n      \"analyze_wildcard\": true\n    }\n  },\n  \"filter\": []\n}"
-        }

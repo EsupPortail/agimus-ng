@@ -1,0 +1,18 @@
+{
+  "visualization": {
+    "description": "",
+    "kibanaSavedObjectMeta": {
+      "searchSourceJSON": "{\"query\":{\"query\":\"\",\"language\":\"kuery\"},\"filter\":[]}"
+    },
+    "title": "Info FILTRES",
+    "uiStateJSON": "{}",
+    "version": 1,
+    "visState": "{\"title\":\"Info FILTRES\",\"type\":\"markdown\",\"params\":{\"fontSize\":11,\"openLinksInNewTab\":false,\"markdown\":\"## FILTRES\\nEn cliquant sur les éléments des tableaux ci-dessous, vous avez la possibilité de filtrer les graphiques de ce tableau de bord.\\n\\nPour annuler un filtre posé, supprimez ou décochez le filtre correspondant en haut de page.\"},\"aggs\":[]}"
+  },
+  "type": "visualization",
+  "references": [],
+  "migrationVersion": {
+    "visualization": "7.7.0"
+  },
+  "updated_at": "2020-02-10T13:20:00.824Z"
+}

@@ -1,0 +1,18 @@
+{
+  "visualization": {
+    "description": "",
+    "kibanaSavedObjectMeta": {
+      "searchSourceJSON": "{\"query\":{\"query\":{\"query_string\":{\"query\":\"*\",\"analyze_wildcard\":true}},\"language\":\"lucene\"},\"filter\":[]}"
+    },
+    "title": "Moodle : CONSULTATIONS",
+    "uiStateJSON": "{}",
+    "version": 1,
+    "visState": "{\"type\":\"markdown\",\"params\":{\"markdown\":\"> ** CONSULTATIONS**\"},\"aggs\":[],\"listeners\":{},\"title\":\"Moodle : CONSULTATIONS\"}"
+  },
+  "type": "visualization",
+  "references": [],
+  "migrationVersion": {
+    "visualization": "7.7.0"
+  },
+  "updated_at": "2020-02-07T10:31:05.083Z"
+}

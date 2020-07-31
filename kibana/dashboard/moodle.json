@@ -1,0 +1,101 @@
+Moodle{
+  "dashboard": {
+    "description": "",
+    "hits": 0,
+    "kibanaSavedObjectMeta": {
+      "searchSourceJSON": "{\"filter\":[],\"query\":{\"language\":\"lucene\",\"query\":\"*\"}}"
+    },
+    "optionsJSON": "{\"darkTheme\":false}",
+    "panelsJSON": "[{\"version\":\"7.5.2\",\"gridData\":{\"h\":16,\"i\":\"1\",\"w\":20,\"x\":28,\"y\":32},\"panelIndex\":\"1\",\"embeddableConfig\":{},\"panelRefName\":\"panel_0\"},{\"version\":\"7.5.2\",\"gridData\":{\"h\":16,\"i\":\"2\",\"w\":28,\"x\":0,\"y\":12},\"panelIndex\":\"2\",\"embeddableConfig\":{},\"panelRefName\":\"panel_1\"},{\"version\":\"7.5.2\",\"gridData\":{\"h\":8,\"i\":\"3\",\"w\":12,\"x\":12,\"y\":0},\"panelIndex\":\"3\",\"embeddableConfig\":{},\"panelRefName\":\"panel_2\"},{\"version\":\"7.5.2\",\"gridData\":{\"h\":12,\"i\":\"4\",\"w\":48,\"x\":0,\"y\":52},\"panelIndex\":\"4\",\"embeddableConfig\":{},\"panelRefName\":\"panel_3\"},{\"version\":\"7.5.2\",\"gridData\":{\"h\":16,\"i\":\"5\",\"w\":16,\"x\":0,\"y\":64},\"panelIndex\":\"5\",\"embeddableConfig\":{},\"panelRefName\":\"panel_4\"},{\"version\":\"7.5.2\",\"gridData\":{\"h\":16,\"i\":\"6\",\"w\":32,\"x\":16,\"y\":64},\"panelIndex\":\"6\",\"embeddableConfig\":{},\"panelRefName\":\"panel_5\"},{\"version\":\"7.5.2\",\"gridData\":{\"h\":16,\"i\":\"7\",\"w\":20,\"x\":28,\"y\":12},\"panelIndex\":\"7\",\"embeddableConfig\":{},\"panelRefName\":\"panel_6\"},{\"version\":\"7.5.2\",\"gridData\":{\"h\":20,\"i\":\"8\",\"w\":24,\"x\":0,\"y\":80},\"panelIndex\":\"8\",\"embeddableConfig\":{},\"panelRefName\":\"panel_7\"},{\"version\":\"7.5.2\",\"gridData\":{\"h\":8,\"i\":\"9\",\"w\":12,\"x\":24,\"y\":0},\"panelIndex\":\"9\",\"embeddableConfig\":{},\"panelRefName\":\"panel_8\"},{\"version\":\"7.5.2\",\"gridData\":{\"h\":16,\"i\":\"11\",\"w\":28,\"x\":0,\"y\":32},\"panelIndex\":\"11\",\"embeddableConfig\":{},\"panelRefName\":\"panel_9\"},{\"version\":\"7.5.2\",\"gridData\":{\"h\":4,\"i\":\"12\",\"w\":48,\"x\":0,\"y\":28},\"panelIndex\":\"12\",\"embeddableConfig\":{},\"panelRefName\":\"panel_10\"},{\"version\":\"7.5.2\",\"gridData\":{\"h\":4,\"i\":\"13\",\"w\":48,\"x\":0,\"y\":8},\"panelIndex\":\"13\",\"embeddableConfig\":{},\"panelRefName\":\"panel_11\"},{\"version\":\"7.5.2\",\"gridData\":{\"h\":4,\"i\":\"14\",\"w\":48,\"x\":0,\"y\":48},\"panelIndex\":\"14\",\"embeddableConfig\":{},\"panelRefName\":\"panel_12\"},{\"version\":\"7.5.2\",\"gridData\":{\"h\":8,\"i\":\"15\",\"w\":12,\"x\":36,\"y\":0},\"panelIndex\":\"15\",\"embeddableConfig\":{},\"panelRefName\":\"panel_13\"},{\"version\":\"7.5.2\",\"gridData\":{\"h\":8,\"i\":\"16\",\"w\":12,\"x\":0,\"y\":0},\"panelIndex\":\"16\",\"embeddableConfig\":{},\"panelRefName\":\"panel_14\"},{\"version\":\"7.5.2\",\"gridData\":{\"h\":20,\"i\":\"176dc42f-63e1-4a24-8427-f34999c37d1f\",\"w\":24,\"x\":24,\"y\":80},\"panelIndex\":\"176dc42f-63e1-4a24-8427-f34999c37d1f\",\"embeddableConfig\":{},\"panelRefName\":\"panel_15\"}]",
+    "timeRestore": false,
+    "title": "Moodle",
+    "version": 1
+  },
+  "type": "dashboard",
+  "references": [
+    {
+      "id": "Moodle-:-les-10-cours-les-plus-consultés",
+      "name": "panel_0",
+      "type": "visualization"
+    },
+    {
+      "id": "Moodle-:-modules-les-plus-utilisés",
+      "name": "panel_1",
+      "type": "visualization"
+    },
+    {
+      "id": "Moodle-:-Nb-utilisateurs-uniques",
+      "name": "panel_2",
+      "type": "visualization"
+    },
+    {
+      "id": "Moodle-:-proportion-de-consultation-de-chaque-niveau-1",
+      "name": "panel_3",
+      "type": "visualization"
+    },
+    {
+      "id": "Moodle-:-Provenance",
+      "name": "panel_4",
+      "type": "visualization"
+    },
+    {
+      "id": "Moodle-:-connexions-par-jour",
+      "name": "panel_5",
+      "type": "visualization"
+    },
+    {
+      "id": "Moodle-cours-:-Nb-cours-par-niveau-1",
+      "name": "panel_6",
+      "type": "visualization"
+    },
+    {
+      "id": "Moodle-cours-:-Évolution-cours-actif-slash-inactif",
+      "name": "panel_7",
+      "type": "visualization"
+    },
+    {
+      "id": "Moodle-:-Nb-connexions",
+      "name": "panel_8",
+      "type": "visualization"
+    },
+    {
+      "id": "Moodle-cours-:-Évolution-nb-cours-slash-niveau-1",
+      "name": "panel_9",
+      "type": "visualization"
+    },
+    {
+      "id": "Moodle-:-COURS",
+      "name": "panel_10",
+      "type": "visualization"
+    },
+    {
+      "id": "Moodle-:-CONNEXIONS",
+      "name": "panel_11",
+      "type": "visualization"
+    },
+    {
+      "id": "Moodle-:-CONSULTATIONS",
+      "name": "panel_12",
+      "type": "visualization"
+    },
+    {
+      "id": "PERIODE",
+      "name": "panel_13",
+      "type": "visualization"
+    },
+    {
+      "id": "Moodle-cours-:-Nb-cours",
+      "name": "panel_14",
+      "type": "visualization"
+    },
+    {
+      "id": "6ace6190-4990-11ea-98d4-0fdbe38e2a43",
+      "name": "panel_15",
+      "type": "visualization"
+    }
+  ],
+  "migrationVersion": {
+    "dashboard": "7.3.0"
+  },
+  "updated_at": "2020-02-07T10:31:05.083Z"
+}

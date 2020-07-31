@@ -1,0 +1,24 @@
+{
+  "visualization": {
+    "description": "",
+    "kibanaSavedObjectMeta": {
+      "searchSourceJSON": "{\"query\":{\"query\":{\"query_string\":{\"query\":\"_index:ag-moodledb-* AND mdl_action:loggedin\",\"analyze_wildcard\":true}},\"language\":\"lucene\"},\"filter\":[],\"indexRefName\":\"kibanaSavedObjectMeta.searchSourceJSON.index\"}"
+    },
+    "title": "Moodle : connexions par jour",
+    "uiStateJSON": "{}",
+    "version": 1,
+    "visState": "{\"title\":\"Moodle : connexions par jour\",\"type\":\"histogram\",\"params\":{\"addLegend\":true,\"addTimeMarker\":false,\"addTooltip\":true,\"defaultYExtents\":false,\"mode\":\"grouped\",\"scale\":\"linear\",\"setYExtents\":false,\"shareYAxis\":true,\"times\":[],\"yAxis\":{}},\"aggs\":[{\"id\":\"1\",\"type\":\"cardinality\",\"schema\":\"metric\",\"params\":{\"field\":\"ldap_uid\",\"customLabel\":\"Utilisateurs uniques\"}},{\"id\":\"2\",\"type\":\"date_histogram\",\"schema\":\"segment\",\"params\":{\"field\":\"@timestamp\",\"interval\":\"d\",\"min_doc_count\":1,\"extended_bounds\":{},\"customLabel\":\"Jours\"}},{\"id\":\"3\",\"type\":\"count\",\"schema\":\"metric\",\"params\":{\"customLabel\":\"Nombre total de connexions\"}}],\"listeners\":{}}"
+  },
+  "type": "visualization",
+  "references": [
+    {
+      "id": "f88a1d60-1fee-11ea-9437-75ed488effa6",
+      "name": "kibanaSavedObjectMeta.searchSourceJSON.index",
+      "type": "index-pattern"
+    }
+  ],
+  "migrationVersion": {
+    "visualization": "7.7.0"
+  },
+  "updated_at": "2020-06-02T15:34:59.536Z"
+}

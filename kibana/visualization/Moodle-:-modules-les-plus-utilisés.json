@@ -1,9 +1,0 @@
-{
-    "visState": "{\"type\":\"pie\",\"params\":{\"shareYAxis\":true,\"addTooltip\":true,\"addLegend\":true,\"isDonut\":false},\"aggs\":[{\"id\":\"1\",\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"type\":\"terms\",\"schema\":\"segment\",\"params\":{\"field\":\"mdl_activite\",\"exclude\":{\"pattern\":\"core\"},\"size\":100,\"order\":\"desc\",\"orderBy\":\"1\"}}],\"listeners\":{}}",
-    "kibanaSavedObjectMeta": {
-        "searchSourceJSON": "{\"index\":\"logstash-*\",\"query\":{\"query_string\":{\"query\":\"_type:moodledblog\",\"analyze_wildcard\":true}},\"filter\":[]}"
-    },
-    "version": 1,
-    "description": "",
-    "title": "Moodle : modules les plus utilis\u00e9s"
-}

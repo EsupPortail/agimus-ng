@@ -1,0 +1,24 @@
+{
+  "visualization": {
+    "description": "",
+    "kibanaSavedObjectMeta": {
+      "searchSourceJSON": "{\"query\":{\"query\":{\"query_string\":{\"query\":\"_index:ag-moodledb-* AND mdl_component:core AND mdl_action:viewed\",\"analyze_wildcard\":true}},\"language\":\"lucene\"},\"filter\":[],\"indexRefName\":\"kibanaSavedObjectMeta.searchSourceJSON.index\"}"
+    },
+    "title": "Moodle : les 10 cours les plus consultés",
+    "uiStateJSON": "{}",
+    "version": 1,
+    "visState": "{\"type\":\"pie\",\"params\":{\"shareYAxis\":true,\"addTooltip\":true,\"addLegend\":true,\"isDonut\":false},\"aggs\":[{\"id\":\"1\",\"type\":\"cardinality\",\"schema\":\"metric\",\"params\":{\"field\":\"ldap_uid\"}},{\"id\":\"2\",\"type\":\"terms\",\"schema\":\"segment\",\"params\":{\"field\":\"mdl_nom_cours\",\"size\":10,\"order\":\"desc\",\"orderBy\":\"1\"}}],\"listeners\":{},\"title\":\"Moodle : les 10 cours les plus consultés\"}"
+  },
+  "type": "visualization",
+  "references": [
+    {
+      "id": "f88a1d60-1fee-11ea-9437-75ed488effa6",
+      "name": "kibanaSavedObjectMeta.searchSourceJSON.index",
+      "type": "index-pattern"
+    }
+  ],
+  "migrationVersion": {
+    "visualization": "7.7.0"
+  },
+  "updated_at": "2020-02-07T10:31:05.083Z"
+}

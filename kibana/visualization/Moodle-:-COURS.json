@@ -1,9 +1,0 @@
-{
-    "visState": "{\"type\":\"markdown\",\"params\":{\"markdown\":\"> ** COURS **\"},\"aggs\":[],\"listeners\":{}}",
-    "kibanaSavedObjectMeta": {
-        "searchSourceJSON": "{\"query\":{\"query_string\":{\"query\":\"*\",\"analyze_wildcard\":true}},\"filter\":[]}"
-    },
-    "version": 1,
-    "description": "",
-    "title": "Moodle : COURS"
-}

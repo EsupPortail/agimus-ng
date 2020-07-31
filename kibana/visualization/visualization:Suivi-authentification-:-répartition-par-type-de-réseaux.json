@@ -1,0 +1,24 @@
+{
+  "visualization": {
+    "description": "",
+    "kibanaSavedObjectMeta": {
+      "searchSourceJSON": "{\"query\":{\"query\":{\"query_string\":{\"analyze_wildcard\":true,\"query\":\"_index:ag-casrequest-*\"}},\"language\":\"lucene\"},\"filter\":[],\"indexRefName\":\"kibanaSavedObjectMeta.searchSourceJSON.index\"}"
+    },
+    "title": "Suivi authentification : répartition par type de réseaux",
+    "uiStateJSON": "{\"vis\":{\"colors\":{\"Connexion Externe UL\":\"#0A50A1\",\"Connexion WIFI UL\":\"#CCA300\",\"Connexion filaire UL\":\"#7EB26D\",\"CROUS\":\"#F29191\",\"Autres\":\"#F4D598\",\"WIFI Portail Captif\":\"#B7DBAB\",\"WIFI Eduroam\":\"#806EB7\",\"WIFI Personnels UL\":\"#E5A8E2\"}}}",
+    "version": 1,
+    "visState": "{\"title\":\"Suivi authentification : répartition par type de réseaux\",\"type\":\"pie\",\"params\":{\"addLegend\":true,\"addTooltip\":true,\"isDonut\":false,\"shareYAxis\":true,\"spyPerPage\":10},\"aggs\":[{\"id\":\"1\",\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"type\":\"filters\",\"schema\":\"segment\",\"params\":{\"filters\":[{\"input\":{\"query\":\"network.type:external\",\"language\":\"lucene\"},\"label\":\"Connexion Externe\"},{\"input\":{\"query\":\"network.type:wifi\",\"language\":\"lucene\"},\"label\":\"Connexion WIFI\"},{\"input\":{\"query\":\"network.type:wire\",\"language\":\"lucene\"},\"label\":\"Connexion filaire\"}]}}],\"listeners\":{}}"
+  },
+  "type": "visualization",
+  "references": [
+    {
+      "id": "f88a1d60-1fee-11ea-9437-75ed488effa6",
+      "name": "kibanaSavedObjectMeta.searchSourceJSON.index",
+      "type": "index-pattern"
+    }
+  ],
+  "migrationVersion": {
+    "visualization": "7.7.0"
+  },
+  "updated_at": "2020-01-24T10:22:13.418Z"
+}

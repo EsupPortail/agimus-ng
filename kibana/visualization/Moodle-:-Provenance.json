@@ -1,9 +1,0 @@
-{
-    "visState": "{\"type\":\"pie\",\"params\":{\"shareYAxis\":true,\"addTooltip\":true,\"addLegend\":true,\"isDonut\":false},\"aggs\":[{\"id\":\"1\",\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"type\":\"filters\",\"schema\":\"segment\",\"params\":{\"filters\":[{\"input\":{\"query\":{\"query_string\":{\"query\":\"network.type.raw:external\",\"analyze_wildcard\":true}}},\"label\":\"Ext\u00e9rieur UL\"},{\"input\":{\"query\":{\"query_string\":{\"query\":\"network.type.raw:wire OR network.type.raw:wifi\",\"analyze_wildcard\":true}}},\"label\":\"Int\u00e9rieur UL\"}]}},{\"id\":\"3\",\"type\":\"filters\",\"schema\":\"segment\",\"params\":{\"filters\":[{\"input\":{\"query\":{\"query_string\":{\"query\":\"network.type.raw:wire\",\"analyze_wildcard\":true}}},\"label\":\"Salle p\u00e9dagogique\"},{\"input\":{\"query\":{\"query_string\":{\"query\":\"network.type.raw:wifi\",\"analyze_wildcard\":true}}},\"label\":\"BYOD\"}]}}],\"listeners\":{}}",
-    "kibanaSavedObjectMeta": {
-        "searchSourceJSON": "{\"index\":\"logstash-*\",\"query\":{\"query_string\":{\"query\":\"_type:moodledblog AND mdl_action:loggedin\",\"analyze_wildcard\":true}},\"filter\":[]}"
-    },
-    "version": 1,
-    "description": "",
-    "title": "Moodle : Provenance"
-}

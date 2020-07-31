@@ -1,9 +1,0 @@
-{
-    "visState": "{\"type\":\"metric\",\"params\":{\"fontSize\":60},\"aggs\":[{\"id\":\"1\",\"type\":\"count\",\"schema\":\"metric\",\"params\":{}}],\"listeners\":{}}",
-    "kibanaSavedObjectMeta": {
-        "searchSourceJSON": "{\"index\":\"logstash-*\",\"query\":{\"query_string\":{\"query\":\"_type:moodledblog AND mdl_action:loggedin\",\"analyze_wildcard\":true}},\"filter\":[]}"
-    },
-    "version": 1,
-    "description": "",
-    "title": "Moodle : Nb connexions"
-}

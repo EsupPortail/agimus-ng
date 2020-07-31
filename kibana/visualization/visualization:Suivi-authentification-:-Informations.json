@@ -1,0 +1,18 @@
+{
+  "visualization": {
+    "description": "",
+    "kibanaSavedObjectMeta": {
+      "searchSourceJSON": "{\"query\":{\"query\":{\"query_string\":{\"query\":\"*\",\"analyze_wildcard\":true}},\"language\":\"lucene\"},\"filter\":[]}"
+    },
+    "title": "Suivi authentification : Informations",
+    "uiStateJSON": "{}",
+    "version": 1,
+    "visState": "{\"title\":\"Suivi authentification : Informations\",\"type\":\"markdown\",\"params\":{\"markdown\":\"Ce Dashboard est basé sur les traces issues du serveur SSO CAS.\\n\\nChaque service utilisant le CAS devant passer par ce point central, il est possible d'avoir une vue macro de l'usage des services authentifiés.\",\"openLinksInNewTab\":false,\"fontSize\":12},\"aggs\":[]}"
+  },
+  "type": "visualization",
+  "references": [],
+  "migrationVersion": {
+    "visualization": "7.7.0"
+  },
+  "updated_at": "2020-01-24T10:22:13.418Z"
+}

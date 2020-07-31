@@ -1,5 +1,0 @@
-{
-        "visState" : "{\"type\":\"histogram\",\"params\":{\"addLegend\":true,\"addTimeMarker\":false,\"addTooltip\":true,\"defaultYExtents\":true,\"mode\":\"stacked\",\"scale\":\"linear\",\"setYExtents\":false,\"shareYAxis\":true,\"times\":[],\"yAxis\":{}},\"aggs\":[{\"id\":\"1\",\"type\":\"cardinality\",\"schema\":\"metric\",\"params\":{\"field\":\"uid\"}},{\"id\":\"2\",\"type\":\"range\",\"schema\":\"segment\",\"params\":{\"field\":\"quotaused\",\"ranges\":[{\"from\":0,\"to\":100},{\"from\":100,\"to\":1000},{\"from\":1000,\"to\":2000},{\"from\":2000,\"to\":3000},{\"from\":4000,\"to\":5000},{\"from\":5000,\"to\":6000},{\"from\":6000,\"to\":7000},{\"from\":7000,\"to\":8000},{\"from\":8000,\"to\":9000},{\"from\":9000,\"to\":10000}],\"json\":\"{\\n\\\"script\\\" : \\\"_value/1024/1024\\\"\\n}\"}}],\"listeners\":{}}",
-        "kibanaSavedObjectMeta" : {
-          "searchSourceJSON" : "{\"index\":\"logstash-*\",\"query\":{\"query_string\":{\"query\":\"_type:bulstats AND @timestamp:[now-1d TO now]\",\"analyze_wildcard\":true}},\"filter\":[]}"
-        }

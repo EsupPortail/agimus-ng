@@ -1,0 +1,71 @@
+{
+  "dashboard": {
+    "title": "ezAgimusv2 - Inscriptions",
+    "hits": 0,
+    "description": "",
+    "panelsJSON": "[{\"version\":\"7.7.1\",\"gridData\":{\"x\":36,\"y\":10,\"w\":12,\"h\":25,\"i\":\"9\"},\"panelIndex\":\"9\",\"embeddableConfig\":{\"title\":\"\"},\"panelRefName\":\"panel_0\"},{\"version\":\"7.7.1\",\"gridData\":{\"x\":24,\"y\":10,\"w\":12,\"h\":25,\"i\":\"15\"},\"panelIndex\":\"15\",\"embeddableConfig\":{\"vis\":{\"params\":{\"sort\":{\"columnIndex\":null,\"direction\":null}}},\"title\":\"\"},\"panelRefName\":\"panel_1\"},{\"version\":\"7.7.1\",\"gridData\":{\"x\":0,\"y\":10,\"w\":12,\"h\":25,\"i\":\"16\"},\"panelIndex\":\"16\",\"embeddableConfig\":{\"title\":\"\"},\"panelRefName\":\"panel_2\"},{\"version\":\"7.7.1\",\"gridData\":{\"x\":12,\"y\":10,\"w\":12,\"h\":25,\"i\":\"18\"},\"panelIndex\":\"18\",\"embeddableConfig\":{\"vis\":{\"params\":{\"sort\":{\"columnIndex\":null,\"direction\":null}}},\"title\":\"\"},\"panelRefName\":\"panel_3\"},{\"version\":\"7.7.1\",\"gridData\":{\"x\":32,\"y\":35,\"w\":16,\"h\":25,\"i\":\"19\"},\"panelIndex\":\"19\",\"embeddableConfig\":{},\"panelRefName\":\"panel_4\"},{\"version\":\"7.7.1\",\"gridData\":{\"x\":0,\"y\":35,\"w\":32,\"h\":25,\"i\":\"20\"},\"panelIndex\":\"20\",\"embeddableConfig\":{},\"panelRefName\":\"panel_5\"},{\"version\":\"7.7.1\",\"gridData\":{\"x\":12,\"y\":60,\"w\":36,\"h\":30,\"i\":\"21\"},\"panelIndex\":\"21\",\"embeddableConfig\":{},\"panelRefName\":\"panel_6\"},{\"version\":\"7.7.1\",\"gridData\":{\"x\":0,\"y\":60,\"w\":12,\"h\":20,\"i\":\"22\"},\"panelIndex\":\"22\",\"embeddableConfig\":{},\"panelRefName\":\"panel_7\"},{\"version\":\"7.7.1\",\"gridData\":{\"x\":0,\"y\":0,\"w\":33,\"h\":10,\"i\":\"23\"},\"panelIndex\":\"23\",\"embeddableConfig\":{\"title\":\"\"},\"panelRefName\":\"panel_8\"},{\"version\":\"7.7.1\",\"gridData\":{\"x\":33,\"y\":0,\"w\":15,\"h\":10,\"i\":\"c5e5bde6-79ec-49d5-b043-c29663812a6a\"},\"panelIndex\":\"c5e5bde6-79ec-49d5-b043-c29663812a6a\",\"embeddableConfig\":{},\"panelRefName\":\"panel_9\"}]",
+    "optionsJSON": "{\"darkTheme\":false}",
+    "version": 1,
+    "timeRestore": false,
+    "kibanaSavedObjectMeta": {
+      "searchSourceJSON": "{\"filter\":[],\"query\":{\"query\":\"_index:ag-ezagimus-*\",\"language\":\"lucene\"}}"
+    }
+  },
+  "type": "dashboard",
+  "references": [
+    {
+      "name": "panel_0",
+      "type": "visualization",
+      "id": "TYPE-DE-CONSULTATION"
+    },
+    {
+      "name": "panel_1",
+      "type": "visualization",
+      "id": "PLATEFORMES"
+    },
+    {
+      "name": "panel_2",
+      "type": "visualization",
+      "id": "CATEGORIE"
+    },
+    {
+      "name": "panel_3",
+      "type": "visualization",
+      "id": "COMPOSANTES"
+    },
+    {
+      "name": "panel_4",
+      "type": "visualization",
+      "id": "Consultation-par-niveau-d'étude"
+    },
+    {
+      "name": "panel_5",
+      "type": "visualization",
+      "id": "Consultation-par-niveau-d'étude-et-par-jour"
+    },
+    {
+      "name": "panel_6",
+      "type": "visualization",
+      "id": "Consultation-par-niveau-d'étude-et-par-plateforme"
+    },
+    {
+      "name": "panel_7",
+      "type": "visualization",
+      "id": "RESEAU-UTILISÉ"
+    },
+    {
+      "name": "panel_8",
+      "type": "visualization",
+      "id": "ea1249a0-d5fd-11e9-9111-d70c38835a32"
+    },
+    {
+      "name": "panel_9",
+      "type": "visualization",
+      "id": "PERIODE"
+    }
+  ],
+  "migrationVersion": {
+    "dashboard": "7.3.0"
+  },
+  "updated_at": "2020-06-26T15:46:31.700Z"
+}

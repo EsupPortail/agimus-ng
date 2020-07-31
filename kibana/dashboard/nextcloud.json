@@ -1,0 +1,81 @@
+{
+  "dashboard": {
+    "title": "Nextcloud",
+    "hits": 0,
+    "description": "",
+    "panelsJSON": "[{\"version\":\"7.5.2\",\"gridData\":{\"x\":0,\"y\":0,\"w\":12,\"h\":8,\"i\":\"1\"},\"panelIndex\":\"1\",\"embeddableConfig\":{\"title\":\"\"},\"panelRefName\":\"panel_0\"},{\"version\":\"7.5.2\",\"gridData\":{\"x\":0,\"y\":68,\"w\":48,\"h\":16,\"i\":\"13\"},\"panelIndex\":\"13\",\"embeddableConfig\":{},\"panelRefName\":\"panel_1\"},{\"version\":\"7.5.2\",\"gridData\":{\"x\":2,\"y\":8,\"w\":16,\"h\":12,\"i\":\"14\"},\"panelIndex\":\"14\",\"embeddableConfig\":{\"title\":\"\"},\"panelRefName\":\"panel_2\"},{\"version\":\"7.5.2\",\"gridData\":{\"x\":0,\"y\":20,\"w\":48,\"h\":16,\"i\":\"15\"},\"panelIndex\":\"15\",\"embeddableConfig\":{},\"panelRefName\":\"panel_3\"},{\"version\":\"7.5.2\",\"gridData\":{\"x\":24,\"y\":0,\"w\":12,\"h\":8,\"i\":\"16\"},\"panelIndex\":\"16\",\"embeddableConfig\":{\"title\":\"\"},\"panelRefName\":\"panel_4\"},{\"version\":\"7.5.2\",\"gridData\":{\"x\":12,\"y\":0,\"w\":12,\"h\":8,\"i\":\"17\"},\"panelIndex\":\"17\",\"embeddableConfig\":{\"title\":\"\"},\"panelRefName\":\"panel_5\"},{\"version\":\"7.5.2\",\"gridData\":{\"x\":0,\"y\":36,\"w\":24,\"h\":16,\"i\":\"18\"},\"panelIndex\":\"18\",\"embeddableConfig\":{},\"panelRefName\":\"panel_6\"},{\"version\":\"7.5.2\",\"gridData\":{\"x\":24,\"y\":36,\"w\":24,\"h\":16,\"i\":\"19\"},\"panelIndex\":\"19\",\"embeddableConfig\":{},\"panelRefName\":\"panel_7\"},{\"version\":\"7.5.2\",\"gridData\":{\"x\":0,\"y\":52,\"w\":24,\"h\":16,\"i\":\"20\"},\"panelIndex\":\"20\",\"embeddableConfig\":{},\"panelRefName\":\"panel_8\"},{\"version\":\"7.5.2\",\"gridData\":{\"x\":24,\"y\":52,\"w\":24,\"h\":16,\"i\":\"21\"},\"panelIndex\":\"21\",\"embeddableConfig\":{},\"panelRefName\":\"panel_9\"},{\"version\":\"7.5.2\",\"gridData\":{\"x\":36,\"y\":0,\"w\":12,\"h\":13,\"i\":\"22\"},\"panelIndex\":\"22\",\"embeddableConfig\":{},\"panelRefName\":\"panel_10\"},{\"version\":\"7.5.2\",\"gridData\":{\"x\":19,\"y\":8,\"w\":16,\"h\":12,\"i\":\"23\"},\"panelIndex\":\"23\",\"embeddableConfig\":{\"title\":\"\"},\"panelRefName\":\"panel_11\"}]",
+    "optionsJSON": "{\"darkTheme\":false,\"hidePanelTitles\":false}",
+    "version": 1,
+    "timeRestore": false,
+    "kibanaSavedObjectMeta": {
+      "searchSourceJSON": "{\"filter\":[],\"query\":{\"language\":\"lucene\",\"query\":\"*\"}}"
+    }
+  },
+  "type": "dashboard",
+  "references": [
+    {
+      "name": "panel_0",
+      "type": "visualization",
+      "id": "Nextcloud-:-Nombre-d'utilisateurs-unique"
+    },
+    {
+      "name": "panel_1",
+      "type": "visualization",
+      "id": "Nextcloud-:-Répartition-des-utilisateurs-par-tranche-de-nombre-de-fichier-(ventilé-par-catégorie-de-personnel)"
+    },
+    {
+      "name": "panel_2",
+      "type": "visualization",
+      "id": "Nextcloud-:-Espace-utilisé-en-moyenne-par-utilisateur-(Mo)"
+    },
+    {
+      "name": "panel_3",
+      "type": "visualization",
+      "id": "Nextcloud-:-Répartition-des-utilisateurs-par-tranche-de-utilisation-d'espace-(Mo)"
+    },
+    {
+      "name": "panel_4",
+      "type": "visualization",
+      "id": "Nextcloud-:-Nombre-d'utilisateurs-ayant-plus-de-10-fichiers"
+    },
+    {
+      "name": "panel_5",
+      "type": "visualization",
+      "id": "Nextcloud-:-Nombre-d'utilisateurs-unique-(avec-plus-d'1-Mo)"
+    },
+    {
+      "name": "panel_6",
+      "type": "visualization",
+      "id": "Nextcloud-:-Evolution-du-nombre-de-fichier-moyen-par-jour"
+    },
+    {
+      "name": "panel_7",
+      "type": "visualization",
+      "id": "Nextcloud-:-Evolution-du-quota-moyen-par-jour"
+    },
+    {
+      "name": "panel_8",
+      "type": "visualization",
+      "id": "Nextcloud-:-Evolution-du-nombre-total-de-fichier"
+    },
+    {
+      "name": "panel_9",
+      "type": "visualization",
+      "id": "Nextcloud-:-Evolution-du-volume-total-(Go)"
+    },
+    {
+      "name": "panel_10",
+      "type": "visualization",
+      "id": "PERIODE"
+    },
+    {
+      "name": "panel_11",
+      "type": "visualization",
+      "id": "Nextcloud-:-Nombre-de-fichier-moyen-par-utilisateur"
+    }
+  ],
+  "migrationVersion": {
+    "dashboard": "7.3.0"
+  },
+  "updated_at": "2020-04-30T14:02:27.250Z"
+}

@@ -1,9 +1,0 @@
-{
-      "title": "Auth CAS : Informations",
-      "visState": "{\"type\":\"markdown\",\"params\":{\"markdown\":\"# Informations\\nCe Dashboard est basé sur les traces issues du serveur SSO CAS.\\n\\nChaque service utilisant le CAS devant passer par ce point central, le CAS est en mesure de logguer le profil utilisateur associé au service demandé.\"},\"aggs\":[],\"listeners\":{}}",
-      "description": "",
-      "version": 1,
-      "kibanaSavedObjectMeta": {
-         "searchSourceJSON": "{\"query\":{\"query_string\":{\"query\":\"*\",\"analyze_wildcard\":true}},\"filter\":[]}"
-      }
-}
