@@ -3,16 +3,16 @@
 
 ## Version 7.x
 
-| :warning: En cours d'élaboration, cette version n'est pas stable pour le moment |
+| :warning: Version bêta, n'hésitez pas à faire des retours sur la [liste de diffusion](https://listes.esup-portail.org/sympa/info/esup-utilisateurs)  |
 | --- |
 
-Cette version, en cours d'élaboration, est prévue pour être utilisée avec une version 7.x d'ELK (Elasticsearch, Logstash et Kibana.
+Cette version, en version bêta, est prévue pour être utilisée avec une version 7.x d'ELK (Elasticsearch, Logstash et Kibana.
 Utilisez la branche 2.x d'agimus si vous souhaitez utiliser la version 2 des briques ELK.
 
 ## Vers un audimat des services.
 
 Qui utilise quel service ? Quand ? À quel rythme ? L’intérêt des indicateurs mis en place par l’atelier est de mieux connaître l’usage des différents services qui sont déployés dans les établissements et par le fait de mieux en organiser l’accès et de les faire évoluer.
-Aujourd’hui, l’objectif est d’harmoniser ces indicateurs pour pouvoir les exploiter à des échelles régionales et nationales.
+Aujourd'hui, l’objectif est d’harmoniser ces indicateurs pour pouvoir les exploiter à des échelles régionales et nationales.
 
 Objectifs :
  - Définition du besoin d'indicateurs dans nos établissements
@@ -29,8 +29,8 @@ Vous avez des questions ? Vous êtes intéressé par le projet, n'hésitez pas �
 ## Contenu de ce dépôt
 
 Vous trouverez ici les principaux fichiers utilisés pour mettre en place Agimus-NG séparés suivant leur utilité dans les dossiers :
-* [scripts](scripts)
-* [logstash](logstash)
-* [kibana](kibana)
+* [scripts](scripts) : contient les scripts utiles au traitement régulier des logs
+* [logstash](logstash) : contient les configurations logstash de traitement des logs
+* [kibana](kibana) : contient des exemples de configuration kibana basés utilisant les données obtenues à partir des configurations logstash présentées ici
 
 Chaque dossier contient à sa racine une rapide description de son contenu mais pour obtenir plus de détails, rendez vous sur la page wiki du projet.
