@@ -1,11 +1,5 @@
 #! /bin/sh
-# REMOVE http_proxy var
-TMP_PROXY=$http_proxy
-unset http_proxy
 
-# update with the correct path of your logstash 
-/opt/logstash/bin/logstash $*
-
-# RESET http_proxy var
-export http_proxy=$TMP_PROXY
-
+# update with the correct path of your logstash
+# Logstash is by default a bit too talkative
+/opt/logstash/bin/logstash --log.level error --path.settings /etc/logstash/ $* | grep -v "ipeline"
