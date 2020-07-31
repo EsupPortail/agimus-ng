@@ -1,3 +1,3 @@
 build/*
-/experimentation/front-agimus-ng/config/config.php
-/experimentation/front-agimus-ng/CAS*
+/frontal/config/config.php
+/scripts/config.py
