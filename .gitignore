@@ -1,3 +1,4 @@
 build/*
 /frontal/config/config.php
 /scripts/config.py
+/scripts/__pycache__
