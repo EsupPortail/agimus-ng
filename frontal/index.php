@@ -13,7 +13,7 @@
         $root_uri = ""; //substr($_SERVER["REQUEST_URI"],0,-1);
     }
 
-    if ( $_GET['token'] !== 'KDjhkjj77Sghd545JkHNdkkj' ) {
+    if ( $_GET['token'] !== $export_token ) {
     phpCAS::setDebug();
 
     // Initialize phpCAS
@@ -59,7 +59,7 @@
 
     require_once $index_path.'/controller/controller.php';
 
-    if ( $_GET['token'] !== 'KDjhkjj77Sghd545JkHNdkkj' ) {
+    if ( $_GET['token'] !== $export_token ) {
     $casdata = phpCAS::getAttributes();
     $email = isset($casdata['mail']) ? $casdata['mail'] : "";
 

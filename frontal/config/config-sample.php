@@ -16,7 +16,7 @@
       "MANAGER" => "nom_du_groupe_ldap_MANAGER",
       "USER" => "nom_du_groupe_ldap_USER"
     );
-  
+
     $default_admin_username = "adminuid"; //set the first ldap uid used to login on this web site.
 
     # Adresse de contact apparaissant sur l'interface
@@ -25,7 +25,9 @@
 
     # Activer l'export
     # L'export alimente la base, il faut installer pageres par ailleurs pour réaliser effectivement l'export
+    # Le token que vous paramétrerez ici doit également être modifié dans le script de screenshot
     $export_actif = true;
+    $export_token = "KDjhkjj77Sghd545JkHNdkkj";
 
     ///////////////////////////////////////
     // Basic Config of the phpCAS client //
