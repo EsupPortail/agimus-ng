@@ -1,5 +1,13 @@
 #! /bin/sh
 
+# To avoid problems when logstash and ES are on the same server
+# REMOVE http_proxy var
+TMP_PROXY=$http_proxy
+unset http_proxy
+
 # update with the correct path of your logstash
 # Logstash is by default a bit too talkative
 /opt/logstash/bin/logstash --log.level error --path.settings /etc/logstash/ $* | grep -v "ipeline"
+
+# RESET http_proxy var
+export http_proxy=$TMP_PROXY
