@@ -272,6 +272,25 @@ if [ -e "$STT_LOGS/LDAP.OK" ]; then
 
     ####
     #
+    # Traitement des logs du serveur CAS
+    #
+    ####
+
+    if [ ! -e "$STT_LOGS/CASLOG.OK" ]; then
+        if [ -s "$REP_LOGS/serviceStats.log.gz" ]; then
+          echo "$LINE_SEPARATOR"
+          echo "#### Import CAS logs : "`date +'%F %R'`
+          echo "#### Number line in file $DATE/serviceStats.log.gz : "`zcat $REP_LOGS/serviceStats.log.gz | wc -l`
+          zcat $REP_LOGS/serviceStats.log.gz | $LOGSTASH_DIR/logstash --quiet -f $CONF_DIR/casRequest
+          ok_log CASLOG $?
+          echo ""
+        else
+            wait_log CASLOG
+        fi
+    fi
+
+    ####
+    #
     # Traitement des logs Moodle
     #
     ####
