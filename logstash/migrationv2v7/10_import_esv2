@@ -1,6 +1,6 @@
 input {
   elasticsearch {
-    hosts => [ "agimusv2.univ-lorraine.fr:9200" ]
+    hosts => [ "agimusv2.univ.fr:9200" ]
     # Exemple : index => "agimus-2019.08.23"
     index => "agimus-${DATE_A_TRAITER}"
     query => '{"query": {"filtered": {"filter": {"term": {"_type": "${TYPE_A_TRAITER}"}}}}}'
