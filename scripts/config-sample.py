@@ -4,8 +4,8 @@
 cluster_ES = ['http://agimus1.univ.fr:9200/',
 					'http://agimus2.univ.fr:9200/']
 
-# Index kibana à utiliser pour les imports-exports
-index_kibana = '.kibana'
+# URI d'accès à l'API saved_objects de kibana
+uri_saved_objects = 'http://agimus.univ.fr:5701/api/saved_objects'
 
 # Objets kibana à exporter
 objectsToExport = [ 'visualization', 'dashboard', 'index-pattern', 'query', 'config']

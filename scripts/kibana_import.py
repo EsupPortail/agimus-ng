@@ -1,24 +1,25 @@
-#!/usr/bin/env python3
+#!/home/agimus/bin/python
 # -*- coding: utf-8 -*-
 
 # kibana_import.py
-# Usage : scripts/kibana_import.py path_to_folder
+# Usage : scripts/kibana_import.py dossier_a_importer
 
 # Script permettant d'importer un dossier d'objets préalablement exportés dans Kibana.
 
 import sys, json, config
 from pathlib import Path
-from elasticsearch import Elasticsearch
+import requests
+
 
 if len(sys.argv) != 2:
-	print("Erreur : Vous devez spécifier le fichier ou dossier que vous souhaitez importer")
-	print (f'Usage : {sys.argv[0]} dossier_ou_fichier_a_importer')
+	print("Erreur : Vous devez spécifier le dossier ou fichier que vous souhaitez importer")
+	print (f'Usage : {sys.argv[0]} dossier_a_importer')
 	sys.exit(2)
 else :
 	importPath = Path(sys.argv[1])
 	if importPath.exists() :
 		if importPath.is_dir() :
-			files_list = list( importPath.glob('**/*.json') )
+			files_list = list( importPath.glob('**/*.ndjson') )
 		else :
 			files_list = [ importPath ]
 	else :
@@ -26,14 +27,20 @@ else :
 		Usage : {sys.argv[0]} dossier_ou_fichier_a_importer''')
 		sys.exit(1)
 
-# Connexion Elasticsearch
-es = Elasticsearch( config.cluster_ES )
+HEADERS = {
+	'kbn-xsrf': 'true'
+}
 
-print ( f'''\nDébut de l'import dans l'index {config.index_kibana}\n''' )
+uri = f'{config.uri_saved_objects}/_import?overwrite=true'
 
-for filePath in files_list:
-	print ( f'Import de {filePath.stem}' )
-	objet = json.loads( filePath.read_text( encoding='utf-8' ) )
-	es.index( index=config.index_kibana, id=filePath.stem, body=objet )
+files = [{'file': open(f,'rb')} for f in files_list]
 
-print( '\n  -->  Import terminé\n')
+print ( f'''\n#### Début de l'import à l'url {config.uri_saved_objects}\n''' )
+for fichier in files:
+	print(f'''\nImport de {fichier["file"].name}''')
+	r = requests.post(uri, headers=HEADERS, files=fichier)
+	if r.json()["success"]:
+		print(f'''  --> OK''')
+	else :
+		print(f'''  --> Erreur : {r.text}''')
+print( '\n####  -->  Import terminé   ####\n')
