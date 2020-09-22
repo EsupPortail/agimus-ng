@@ -5,6 +5,7 @@ Les fichiers contenus dans ce dossier sont des configurations d'exemple pour vis
 
 ## Import des objets d'exemple
 Les fichiers de configurations sont triés par type : [visualization](visualization) et [dashboard](dashboard)
+Le dossier [dashboard_full](dashboard_full) contient des tableaux de bord complets au nouveau format ndjson.
 Ils peuvent être importés dans elasticsearch grâce à une des deux méthodes ci-dessous.
 Les objets fournis font référence à des index-pattern spécifiques définis dans notre établissement. Il vous faudra modifier les id pour qu'ils correspondent à celui de votre index-pattern ag-*
 
