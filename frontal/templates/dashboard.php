@@ -244,8 +244,8 @@
            'Hier': [moment().subtract(1, 'days'), moment()],
            '7 derniers jours': [moment().subtract(7, 'days'), moment()],
            '30 derniers jours': [moment().subtract(30, 'days'), moment()],
-           'Mois en cours': [moment().startOf('month'), moment().endOf('month')],
-           'Mois dernier': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+           'Mois en cours': [moment().startOf('month'), moment().endOf('month').add(1, 'days')],
+           'Mois dernier': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month').add(1, 'days')]
         },
         opens: 'left',
         drops: 'down',
