@@ -61,19 +61,6 @@ filter {
         }
     }
 
-    # Format booléen pour udlensursis
-	translate {
-		field => "udlensursis"
-		destination => "udlensursis"
-		dictionary => {
-				"O" => true
-				"N" => false
-				}
-		exact => true
-		override => true
-		fallback => false
-	}
-
     # Génération du booléen estInscrit
 	if [supannetuinscription] {
 		mutate {
@@ -149,7 +136,6 @@ filter {
   mutate {
 		remove_field => [ "[host]" ]
     convert => {
-      "udlensursis" => "boolean"
       "estinscrit" => "boolean"
     }
   }

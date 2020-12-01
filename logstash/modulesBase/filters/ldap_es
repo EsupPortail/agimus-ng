@@ -10,10 +10,10 @@ filter {
 				query => "_id:%{ldap_uid}"
 				sort => ""
 				fields => {
-					'eduPersonPrimaryAffiliation' => 'eduPersonPrimaryAffiliation'
-					'supannEntiteAffectationPrincipale' => 'supannEntiteAffectationPrincipale'
-					'supannEtuCursusAnnee' => 'supannEtuCursusAnnee'
-					'supannEtuSecteurDisciplinaire' => 'supannEtuSecteurDisciplinaire'
+					'edupersonprimaryaffiliation' => 'edupersonprimaryaffiliation'
+					'supannentiteaffectationprincipale' => 'supannentiteaffectationprincipale'
+					'supannetucursusannee' => 'supannetucursusannee'
+					'supannetusecteurdisciplinaire' => 'supannetusecteurdisciplinaire'
 				}
 			}
 			# Suppression des valeurs vides

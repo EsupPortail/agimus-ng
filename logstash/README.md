@@ -4,7 +4,7 @@ Les fichiers de configurations logstash contenus dans ce dossier sont des templa
 
 Les configurations logstash peuvent être un fichier contenant toutes les étapes du traitement ou un dossier dont les fichiers de configuration seront traités de manière séquentielle.
 
-Pour paramétrer les attributs issus du LDAP qui permettront d'enrichir vos logs, modifiez le fichier [modulesBase/inputs/LDAP](modulesBase/inputs/LDAP)
+Pour paramétrer les attributs issus du LDAP qui permettront d'enrichir vos logs, modifiez le fichier [modulesBase/inputs/LDAP](modulesBase/inputs/LDAP) ainsi que le fichier [modulesBase/filters/ldap_es](modulesBase/filters/ldap_es).
 
 Chaque dossier correspond à un traitement de logs spécifique à une application.
 Les modifications qui se retrouvent dans plusieurs traitements sont centralisées dans le dossier modulesBase et peuvent être ajoutées par un simple lien symbolique dans le dossier que vous créez. Il peut être nécessaire de nommer le ou les champs à traiter de manière spécifique pour que le module fonctionne.
