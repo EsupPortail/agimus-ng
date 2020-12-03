@@ -1,4 +1,4 @@
-#!/home/agimus/bin/python
+#!/usr/bin/env python3
 # coding: utf8
 
 # preparation_fichiers.py

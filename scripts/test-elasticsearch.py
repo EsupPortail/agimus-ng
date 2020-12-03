@@ -1,4 +1,4 @@
-#!/home/agimus/bin/python
+#!/usr/bin/env python3
 # vim: et sw=4 ts=4:
 # -*- coding: utf-8 -*-
 #
@@ -40,7 +40,7 @@ except elasticsearch.ElasticsearchException as err:
 try:
 	es.indices.delete(index='test-index')
 	print(f'''L'index de test "{index_test}" est supprimé.''')
-	
+
 except elasticsearch.ElasticsearchException as err:
 	print(f'''\n***   Impossible de supprimer l'index {index_test} \n***   Erreur : \n{err}''')
 	sys.exit(1)
